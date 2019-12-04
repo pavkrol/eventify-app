@@ -1,11 +1,16 @@
 import React, { Component } from "react";
+import GlobalStyle from "../GlobalStyle";
+import Hero from "./Hero";
 
 class App extends Component {
   render() {
     return (
-      <main>
-        <h1>Eventify</h1>
-      </main>
+      <>
+        <GlobalStyle />
+        <main>
+          <Hero />
+        </main>
+      </>
     );
   }
 }
