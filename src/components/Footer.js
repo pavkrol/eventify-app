@@ -12,6 +12,17 @@ const FooterWrapper = styled.footer`
   justify-content: space-between;
   align-items: center;
   padding: 0 10%;
+  @media (max-width: 600px) {
+    flex-direction: column;
+    padding: 20px 10%;
+    height: auto;
+    div {
+      margin-bottom: 10px;
+    }
+    div:last-child {
+      margin-bottom: 0;
+    }
+  }
 `;
 
 const FooterItem = styled.div`

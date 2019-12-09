@@ -10,6 +10,13 @@ const LogoWrapper = styled.h1`
   letter-spacing: 3px;
   padding-left: 25px;
   height: 40px;
+  background: linear-gradient(
+    180deg,
+    #e2f1ff 0%,
+    rgba(180, 192, 222, 0.24) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   :before {
     content: "";
     display: block;

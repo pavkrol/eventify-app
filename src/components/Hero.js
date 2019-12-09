@@ -56,6 +56,35 @@ const TextWrapper = styled.div`
       color: #000;
     }
   }
+  @media (max-width: 1100px) {
+    h2 {
+      font-size: 68px;
+    }
+    h3 {
+      font-size: 26px;
+    }
+  }
+  @media (max-width: 850px) {
+    h2 {
+      font-size: 50px;
+    }
+    h3 {
+      font-size: 22px;
+    }
+  }
+  @media (max-width: 600px) {
+    h2 {
+      font-size: 32px;
+    }
+    h3 {
+      font-size: 18px;
+    }
+    button {
+      width: 200px;
+      height: 50px;
+      font-size: 16px;
+    }
+  }
 `;
 
 const Hero = () => {
