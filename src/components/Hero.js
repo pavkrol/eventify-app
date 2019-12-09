@@ -10,7 +10,7 @@ const HeroWrapper = styled.section`
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  padding: 50px 10%;
+  padding: 3em 10%;
 `;
 
 const TextWrapper = styled.div`
@@ -22,32 +22,30 @@ const TextWrapper = styled.div`
   h2 {
     font-family: "Lato", sans-serif;
     font-weight: 700;
-    font-size: 84px;
     text-align: center;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    margin-bottom: 10px;
+    margin-bottom: 0.2em;
   }
   h3 {
     font-family: "PT Sans Narrow", sans-serif;
     font-weight: 300;
-    font-size: 32px;
     text-align: center;
     letter-spacing: 0.16em;
-    margin-bottom: 40px;
+    margin-bottom: 0.9em;
   }
   button {
-    width: 250px;
-    height: 50px;
+    width: 16em;
+    height: 3.125em;
     display: flex;
     justify-content: center;
     align-items: center;
     background: rgba(255, 255, 255, 0.3);
     border: 1px solid #ffffff;
-    border-radius: 25px;
+    border-radius: 1.6em;
     font-family: "Lato", sans-serif;
     font-weight: 500;
-    font-size: 18px;
+    font-size: 1.125em;
     letter-spacing: 0.26em;
     text-transform: uppercase;
     transition: all 0.2s ease-in-out;
@@ -56,33 +54,11 @@ const TextWrapper = styled.div`
       color: #000;
     }
   }
-  @media (max-width: 1100px) {
-    h2 {
-      font-size: 68px;
-    }
-    h3 {
-      font-size: 26px;
-    }
-  }
-  @media (max-width: 850px) {
-    h2 {
-      font-size: 50px;
-    }
-    h3 {
-      font-size: 22px;
-    }
-  }
-  @media (max-width: 600px) {
-    h2 {
-      font-size: 32px;
-    }
-    h3 {
-      font-size: 18px;
-    }
+  @media (max-width: 37.5em) {
     button {
-      width: 200px;
-      height: 50px;
-      font-size: 16px;
+      width: 12.5em;
+      height: 3.125em;
+      font-size: 1em;
     }
   }
 `;
