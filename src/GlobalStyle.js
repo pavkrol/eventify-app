@@ -17,28 +17,28 @@ const GlobalStyle = createGlobalStyle`
 }
 
 h2 {
-  font-size: calc( var(--h2-font-size-min) * 1em);
+  font-size: calc( var(--h2-font-size-min) * 1rem);
 }
 h3 {
-  font-size: calc( var(--h3-font-size-min) * 1em);
+  font-size: calc( var(--h3-font-size-min) * 1rem);
 }
 
-@media screen and (min-width: 24.15em) {
+@media screen and (min-width: 24.15rem) {
   h2 {
-    font-size: calc((var(--h2-font-size-min) * 1em) + (var(--h2-font-size-max) - var(--h2-font-size-min) ) * ((100vw - ( var(--bp-small) * 1em )) / (var(--bp-xlarge) - var(--bp-small) )));
+    font-size: calc((var(--h2-font-size-min) * 1rem) + (var(--h2-font-size-max) - var(--h2-font-size-min) ) * ((100vw - ( var(--bp-small) * 1rem )) / (var(--bp-xlarge) - var(--bp-small) )));
   }
   h3 {
-    font-size: calc((var(--h3-font-size-min) * 1em) + (var(--h3-font-size-max) - var(--h3-font-size-min) ) * ((100vw - ( var(--bp-small) * 1em )) / (var(--bp-xlarge) - var(--bp-small) )));
+    font-size: calc((var(--h3-font-size-min) * 1rem) + (var(--h3-font-size-max) - var(--h3-font-size-min) ) * ((100vw - ( var(--bp-small) * 1rem )) / (var(--bp-xlarge) - var(--bp-small) )));
   }
 }
 
 
-@media screen and (min-width: 75em){
+@media screen and (min-width: 75rem){
   h2 {
-    font-size: calc(var(--h2-font-size-max) * 1em);
+    font-size: calc(var(--h2-font-size-max) * 1rem);
   } 
   h3 {
-    font-size: calc(var(--h3-font-size-max) * 1em);
+    font-size: calc(var(--h3-font-size-max) * 1rem);
   } 
 }
 

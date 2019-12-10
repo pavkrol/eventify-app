@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import { Router } from "@reach/router";
 import GlobalStyle from "../GlobalStyle";
-import Hero from "./Hero";
+import Hero from "../views/Hero";
+import SearchView from "../views/SearchView";
 
 class App extends Component {
   render() {
@@ -8,7 +10,10 @@ class App extends Component {
       <>
         <GlobalStyle />
         <main>
-          <Hero />
+          <Router>
+            <Hero path="/" />
+            <SearchView path="search" />
+          </Router>
         </main>
       </>
     );
