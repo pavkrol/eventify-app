@@ -2,6 +2,10 @@ import React from "react";
 import styled from "styled-components";
 
 const LogoWrapper = styled.h1`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 12rem;
   position: relative;
   font-family: "Rubik", sans-serif;
   font-size: 2rem;
