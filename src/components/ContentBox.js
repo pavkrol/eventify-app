@@ -1,8 +1,7 @@
-import React, { useRef, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import ContentBoxBody from "./ContentBoxBody";
 import ContentBoxHeader from "./ContentBoxHeader";
-import { TweenMax } from "gsap";
 
 const ContentBoxWrapper = styled.section`
   width: 90%;
@@ -14,12 +13,15 @@ const ContentBoxWrapper = styled.section`
 `;
 
 const ContentBox = () => {
-  const box = useRef(null);
+  const [activeScreen, setActiveScreen] = useState("search events");
 
+  const changeScreen = screen => {
+    setActiveScreen(screen);
+  };
   return (
-    <ContentBoxWrapper ref={box}>
-      <ContentBoxHeader />
-      <ContentBoxBody />
+    <ContentBoxWrapper>
+      <ContentBoxHeader changeScreen={changeScreen} />
+      <ContentBoxBody activeScreen={activeScreen} />
     </ContentBoxWrapper>
   );
 };

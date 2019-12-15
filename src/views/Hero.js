@@ -4,6 +4,7 @@ import { Link } from "@reach/router";
 import background from "../img/background.jpg";
 import Logo from "../components/Logo";
 import Footer from "../components/Footer";
+import { fluidFont } from "../typography";
 
 const HeroWrapper = styled.section`
   min-height: 100vh;
@@ -21,6 +22,7 @@ const TextWrapper = styled.div`
   justify-content: center;
   align-items: center;
   h2 {
+    ${fluidFont(2, 5, 24.15, 75)}
     font-family: "Lato", sans-serif;
     font-weight: 700;
     text-align: center;
@@ -29,6 +31,7 @@ const TextWrapper = styled.div`
     margin-bottom: 1rem;
   }
   h3 {
+    ${fluidFont(1, 2, 24.15, 75)}
     font-family: "PT Sans Narrow", sans-serif;
     font-weight: 300;
     text-align: center;

@@ -3,45 +3,6 @@ import { createGlobalStyle } from "styled-components";
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css?family=Lato:300,400,700|PT+Sans+Narrow|Rubik:700|Work+Sans:300,400,500&display=swap');
 
-:root {
-  --bp-small: 24.15;
-  --bp-medium: 43.75;
-  --bp-large: 60.25;
-  --bp-xlarge: 75;
-
-  --h2-font-size-min: 2;
-  --h2-font-size-max: 5;
-
-  --h3-font-size-min: 1;
-  --h3-font-size-max: 2;
-}
-
-h2 {
-  font-size: calc( var(--h2-font-size-min) * 1rem);
-}
-h3 {
-  font-size: calc( var(--h3-font-size-min) * 1rem);
-}
-
-@media screen and (min-width: 24.15rem) {
-  h2 {
-    font-size: calc((var(--h2-font-size-min) * 1rem) + (var(--h2-font-size-max) - var(--h2-font-size-min) ) * ((100vw - ( var(--bp-small) * 1rem )) / (var(--bp-xlarge) - var(--bp-small) )));
-  }
-  h3 {
-    font-size: calc((var(--h3-font-size-min) * 1rem) + (var(--h3-font-size-max) - var(--h3-font-size-min) ) * ((100vw - ( var(--bp-small) * 1rem )) / (var(--bp-xlarge) - var(--bp-small) )));
-  }
-}
-
-
-@media screen and (min-width: 75rem){
-  h2 {
-    font-size: calc(var(--h2-font-size-max) * 1rem);
-  } 
-  h3 {
-    font-size: calc(var(--h3-font-size-max) * 1rem);
-  } 
-}
-
 
 *,
 *::before,

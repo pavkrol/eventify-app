@@ -1,17 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import Loader from "./Loader";
+import SearchEvents from "./SearchEvents";
 
-const ContentBoxBodyWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+const ContentBoxBodyWrapper = styled.div``;
 
-const ContentBoxBody = () => {
+const ContentBoxBody = ({ activeScreen }) => {
   return (
     <ContentBoxBodyWrapper>
-      <Loader />
+      {activeScreen === "search events" ? <SearchEvents /> : <Loader />}
     </ContentBoxBodyWrapper>
   );
 };

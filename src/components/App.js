@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Router } from "@reach/router";
 import GlobalStyle from "../GlobalStyle";
 import Hero from "../views/Hero";
-import SearchView from "../views/MainView";
+import MainView from "../views/MainView";
 
 class App extends Component {
   render() {
@@ -12,7 +12,7 @@ class App extends Component {
         <main>
           <Router>
             <Hero path="/" />
-            <SearchView path="search" />
+            <MainView path="search" />
           </Router>
         </main>
       </>
