@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import SearchBar from "./SearchBar";
 import SearchResults from "./SearchResults";
+import { firestore } from "../firebase";
+import Popup from "./Popup";
 
 const SearchEventsWrapper = styled.div`
   display: flex;
@@ -10,18 +12,52 @@ const SearchEventsWrapper = styled.div`
 `;
 
 const SearchEvents = () => {
-  const [searchBy, setSearchBy] = useState("");
-  const [searchValue, setSearchValue] = useState("");
+  const [key, setKey] = useState("");
+  const [searchResults, setResults] = useState("");
+  const [fetchingData, setFetchingData] = useState(false);
+  const [popupOpen, togglePopup] = useState(false);
+  const [temporaryData, setTemporaryData] = useState({});
 
-  const search = (type, value) => {
-    setSearchBy(type);
-    setSearchValue(value);
+  useEffect(() => {
+    const getKey = async () => {
+      const result = await (
+        await firestore.collection("songkick").get()
+      ).docs[0].data().key;
+      setKey(result);
+    };
+    getKey();
+  }, []);
+
+  const search = async (type, value) => {
+    setFetchingData(true);
+    if (type === "artist") {
+      const resp = await fetch(
+        `https://api.songkick.com/api/3.0/search/artists.json?apikey=${key}&query=${value}`
+      );
+      const data = await resp.json();
+      if (data.resultsPage.results.artist.length === 1) {
+        setResults(data);
+      } else {
+        setTemporaryData(data);
+        togglePopup(!popupOpen);
+      }
+    }
+    setFetchingData(false);
+  };
+
+  const chooseQuery = finalData => {
+    setResults(finalData);
+    togglePopup(!popupOpen);
   };
 
   return (
     <SearchEventsWrapper>
       <SearchBar search={search} />
-      <SearchResults searchBy={searchBy} searchValue={searchValue} />
+      <SearchResults
+        searchResults={searchResults}
+        fetchingData={fetchingData}
+      />
+      {popupOpen && <Popup data={temporaryData} chooseQuery={chooseQuery} />}
     </SearchEventsWrapper>
   );
 };
