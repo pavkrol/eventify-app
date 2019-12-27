@@ -48,6 +48,7 @@ const SearchEvents = () => {
   const chooseQuery = finalData => {
     setResults(finalData);
     togglePopup(!popupOpen);
+    console.log(finalData);
   };
 
   return (
