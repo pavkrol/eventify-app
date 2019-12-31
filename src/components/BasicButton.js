@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-const BasicButton = ({ width, height, color, action, children }) => {
+const BasicButton = ({ height, color, action, children }) => {
   const BasicButtonWrapper = styled.button`
-    width: ${width}rem;
+    padding: 0 1.5rem;
     height: ${height}rem;
     background-color: ${color};
     border-radius: 0.3125rem;

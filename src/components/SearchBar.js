@@ -46,7 +46,6 @@ const SearchBar = ({ search }) => {
       <p>{searchBy}:</p>
       <input onChange={e => setInputValue(e.target.value)} value={inputValue} />
       <BasicButton
-        width="7.5"
         height="2.5"
         color="#2BCA91"
         action={() => search(searchBy, inputValue)}

@@ -25,12 +25,7 @@ const ChooseQuery = ({ id, name, action }) => {
   return (
     <ChooseQueryWrapper>
       <p>{name}</p>
-      <EmptyButton
-        color="#FFF"
-        width="6"
-        height="2"
-        action={() => handleClick(id)}
-      >
+      <EmptyButton color="#FFF" height="2" action={() => handleClick(id)}>
         Search
       </EmptyButton>
     </ChooseQueryWrapper>

@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-const EmptyButton = ({ width, height, color, action, children }) => {
+const EmptyButton = ({ height, color, action, children }) => {
   const EmptyButtonWrapper = styled.button`
-    width: ${width}rem;
+    padding: 0 1rem;
     height: ${height}rem;
     background-color: transparent;
     border: 1px solid ${color};
