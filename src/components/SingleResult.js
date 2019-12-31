@@ -13,14 +13,14 @@ const SingleResultWrapper = styled.div`
   align-items: center;
 `;
 
-const SingleResult = () => {
+const SingleResult = ({ data }) => {
   return (
     <SingleResultWrapper>
       <ArtistThumbnail />
       <Heart />
-      <ResultsDataBox data={["Artist Name", "Event Name"]} />
-      <ResultsDataBox data={["City", "Venue Name"]} />
-      <ResultsDataBox data={["10/12/2020"]} />
+      <ResultsDataBox data={[data.artist, data.name]} />
+      <ResultsDataBox data={[data.city, data.venue]} />
+      <ResultsDataBox data={[data.date]} />
       <EmptyButton
         height="2.5"
         color="#E2F1FF"

@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import SingleResult from "./SingleResult";
+import PropTypes from "prop-types";
 
 const ResultsTableWrapper = styled.section`
   display: flex;
@@ -23,9 +24,15 @@ const ResultsTable = ({ searchResults }) => {
   return (
     <ResultsTableWrapper>
       <h2>Search results:</h2>
-      <SingleResult />
+      {searchResults.map(item => (
+        <SingleResult key={item.id} data={item} />
+      ))}
     </ResultsTableWrapper>
   );
 };
 
 export default ResultsTable;
+
+ResultsTable.propTypes = {
+  searchResults: PropTypes.array
+};

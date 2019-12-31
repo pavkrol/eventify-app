@@ -13,7 +13,7 @@ const SearchEventsWrapper = styled.div`
 
 const SearchEvents = () => {
   const [key, setKey] = useState("");
-  const [searchResults, setResults] = useState("");
+  const [searchResults, setResults] = useState([]);
   const [fetchingData, setFetchingData] = useState(false);
   const [popupOpen, togglePopup] = useState(false);
   const [temporaryData, setTemporaryData] = useState({});
@@ -31,24 +31,53 @@ const SearchEvents = () => {
   const search = async (type, value) => {
     setFetchingData(true);
     if (type === "artist") {
-      const resp = await fetch(
-        `https://api.songkick.com/api/3.0/search/artists.json?apikey=${key}&query=${value}`
-      );
-      const data = await resp.json();
-      if (data.resultsPage.results.artist.length === 1) {
-        setResults(data);
-      } else {
-        setTemporaryData(data);
-        togglePopup(!popupOpen);
-      }
+      searchArtist(value);
     }
     setFetchingData(false);
   };
 
-  const chooseQuery = finalData => {
-    setResults(finalData);
+  const searchArtist = async artistName => {
+    const resp = await fetch(
+      `https://api.songkick.com/api/3.0/search/artists.json?apikey=${key}&query=${artistName}`
+    );
+    const data = await resp.json();
+    if (data.resultsPage.results.artist.length === 1) {
+      searchEvents(data.resultsPage.results.artist.id);
+    } else {
+      chooseQuery(data);
+    }
+  };
+
+  const searchEvents = async artist_id => {
+    console.log(artist_id);
+    const resp = await fetch(
+      `https://api.songkick.com/api/3.0/artists/${artist_id}/calendar.json?apikey=${key}`
+    );
+    const data = await resp.json();
+    console.log(data);
+    if (data.resultsPage.totalEntries) {
+      const eventsList = data.resultsPage.results.event.map(event => ({
+        id: event.id,
+        name: event.displayName,
+        date: event.start.date,
+        artist: "to do",
+        city: event.location.city,
+        venue: event.venue.displayName
+      }));
+      setResults(eventsList);
+    } else {
+      console.log("there are no events for this artist");
+    }
+  };
+
+  const chooseQuery = data => {
+    setTemporaryData(data);
     togglePopup(!popupOpen);
-    console.log(finalData);
+  };
+
+  const confirmChoice = finalChoice => {
+    togglePopup(!popupOpen);
+    searchEvents(finalChoice);
   };
 
   return (
@@ -58,7 +87,9 @@ const SearchEvents = () => {
         searchResults={searchResults}
         fetchingData={fetchingData}
       />
-      {popupOpen && <Popup data={temporaryData} chooseQuery={chooseQuery} />}
+      {popupOpen && (
+        <Popup data={temporaryData} confirmChoice={confirmChoice} />
+      )}
     </SearchEventsWrapper>
   );
 };

@@ -41,7 +41,7 @@ const PopupWrapper = styled.div`
   }
 `;
 
-const Popup = ({ data, chooseQuery }) => {
+const Popup = ({ data, confirmChoice }) => {
   const artists = data.resultsPage.results.artist;
 
   return (
@@ -56,7 +56,7 @@ const Popup = ({ data, chooseQuery }) => {
             key={artist.id}
             name={artist.displayName}
             id={artist.id}
-            action={chooseQuery}
+            action={confirmChoice}
           />
         ))}
       </div>
