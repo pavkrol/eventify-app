@@ -10,13 +10,13 @@ const SearchResultsWrapper = styled.div`
   align-items: center;
 `;
 
-const SearchResults = ({ searchResults, fetchingData }) => {
+const SearchResults = ({ searchResults, fetchingData, noResults }) => {
   return (
     <SearchResultsWrapper>
       {fetchingData ? (
         <Loader />
       ) : (
-        <ResultsTable searchResults={searchResults} />
+        <ResultsTable searchResults={searchResults} noResults={noResults} />
       )}
     </SearchResultsWrapper>
   );

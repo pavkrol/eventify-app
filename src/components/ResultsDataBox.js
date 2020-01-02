@@ -7,7 +7,6 @@ const ResultsDataBoxWrapper = styled.div`
   flex-direction: column;
   justify-content: space-around;
   align-items: flex-start;
-  padding: 0 1.5rem;
   p {
     font-family: "Work Sans", sans-serif;
     font-weight: 400;

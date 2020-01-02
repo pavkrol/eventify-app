@@ -1,5 +1,10 @@
 import React, { useRef, useEffect } from "react";
 import { TweenMax } from "gsap";
+import styled from "styled-components";
+
+const LoaderWrapper = styled.div`
+  margin: 2rem;
+`;
 
 const Loader = () => {
   const blue = useRef(null);
@@ -24,12 +29,14 @@ const Loader = () => {
   }, []);
 
   return (
-    <svg viewBox="0 0 150 33.2" width="90" height="60">
-      <circle ref={blue} cx="16.1" cy="16.6" r="16.1" fill="#b4c0de" />
-      <circle ref={red} cx="55.2" cy="16.6" r="16.1" fill="#8a96b3" />
-      <circle ref={yellow} cx="94.3" cy="16.6" r="16.1" fill="#636f8a" />
-      <circle ref={green} cx="133.4" cy="16.6" r="16.1" fill="#3d4962" />
-    </svg>
+    <LoaderWrapper>
+      <svg viewBox="0 0 150 33.2" width="90" height="60">
+        <circle ref={blue} cx="16.1" cy="16.6" r="16.1" fill="#b4c0de" />
+        <circle ref={red} cx="55.2" cy="16.6" r="16.1" fill="#8a96b3" />
+        <circle ref={yellow} cx="94.3" cy="16.6" r="16.1" fill="#636f8a" />
+        <circle ref={green} cx="133.4" cy="16.6" r="16.1" fill="#3d4962" />
+      </svg>
+    </LoaderWrapper>
   );
 };
 

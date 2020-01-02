@@ -8,9 +8,17 @@ import BasicButton from "./BasicButton";
 
 const SingleResultWrapper = styled.div`
   width: 100%;
-  display: flex;
+  display: grid;
   justify-content: space-between;
   align-items: center;
+  grid-template-columns: 3.75rem 5rem 1fr 1fr 9rem 9rem 9rem;
+  grid-column-gap: 1rem;
+  padding-bottom: 1.5rem;
+  margin-top: 1.5rem;
+  border-bottom: 0.5px solid #a5abbd50;
+  :last-child {
+    border-bottom: none;
+  }
 `;
 
 const SingleResult = ({ data }) => {

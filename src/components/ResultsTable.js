@@ -18,15 +18,26 @@ const ResultsTableWrapper = styled.section`
     margin: 1rem 0;
     width: 100%;
   }
+  h3 {
+    width: 100%;
+    height: 5rem;
+    text-align: center;
+    font-family: "Work Sans", sans-serif;
+    font-weight: 400;
+    font-size: 1.25rem;
+    letter-spacing: 0.1em;
+  }
 `;
 
-const ResultsTable = ({ searchResults }) => {
+const ResultsTable = ({ searchResults, noResults }) => {
   return (
     <ResultsTableWrapper>
       <h2>Search results:</h2>
-      {searchResults.map(item => (
-        <SingleResult key={item.id} data={item} />
-      ))}
+      {noResults ? (
+        <h3>Sorry, but there aren't any upcoming events for that artist.</h3>
+      ) : (
+        searchResults.map(item => <SingleResult key={item.id} data={item} />)
+      )}
     </ResultsTableWrapper>
   );
 };

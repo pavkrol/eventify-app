@@ -18,14 +18,14 @@ const ChooseQueryWrapper = styled.div`
 `;
 
 const ChooseQuery = ({ id, name, action }) => {
-  const handleClick = id => {
-    action(id);
+  const handleClick = (id, name) => {
+    action(id, name);
   };
 
   return (
     <ChooseQueryWrapper>
       <p>{name}</p>
-      <EmptyButton color="#FFF" height="2" action={() => handleClick(id)}>
+      <EmptyButton color="#FFF" height="2" action={() => handleClick(id, name)}>
         Search
       </EmptyButton>
     </ChooseQueryWrapper>
