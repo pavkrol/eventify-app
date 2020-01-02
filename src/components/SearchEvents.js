@@ -51,12 +51,21 @@ const SearchEvents = () => {
     }
   };
 
+  const getArtistImage = async artistName => {
+    const imageResp = await fetch(
+      `https://cors-anywhere.herokuapp.com/https://api.deezer.com/artist/${artistName}`
+    );
+    const imageData = await imageResp.json();
+    return imageData.picture_small;
+  };
+
   const searchEvents = async (artist_id, artist_name) => {
     setNoResults(false);
     const resp = await fetch(
       `https://api.songkick.com/api/3.0/artists/${artist_id}/calendar.json?apikey=${key}`
     );
     const data = await resp.json();
+    const imageSrc = await getArtistImage(artist_name);
     if (data.resultsPage.totalEntries) {
       const eventsList = data.resultsPage.results.event.map(event => ({
         id: event.id,
@@ -64,7 +73,8 @@ const SearchEvents = () => {
         date: event.start.date,
         artist: artist_name,
         city: event.location.city,
-        venue: event.venue.displayName
+        venue: event.venue.displayName,
+        imageSrc: imageSrc
       }));
       setResults(eventsList);
       setFetchingData(false);
@@ -79,7 +89,7 @@ const SearchEvents = () => {
     togglePopup(!popupOpen);
   };
 
-  const confirmChoice = (artist_id, artist_name) => {
+  const confirmChoice = async (artist_id, artist_name) => {
     togglePopup(!popupOpen);
     searchEvents(artist_id, artist_name);
   };

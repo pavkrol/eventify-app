@@ -51,14 +51,16 @@ const Popup = ({ data, confirmChoice }) => {
           There are more than one result mathing your query. Please, choose one
           of the following artists:
         </h2>
-        {artists.map(artist => (
-          <ChooseQuery
-            key={artist.id}
-            name={artist.displayName}
-            id={artist.id}
-            action={confirmChoice}
-          />
-        ))}
+        {artists.map(artist => {
+          return (
+            <ChooseQuery
+              key={artist.id}
+              name={artist.displayName}
+              id={artist.id}
+              action={confirmChoice}
+            />
+          );
+        })}
       </div>
     </PopupWrapper>
   );

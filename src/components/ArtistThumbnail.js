@@ -9,7 +9,7 @@ const ArtistThumbnailImage = styled.img`
   height: 3.75rem;
   background-color: #dcdcdc;
   border-radius: 0.3rem;
-  padding: 0.8rem;
+  padding: ${props => (props.source !== defaultImage ? "0" : "0.8rem")};
 `;
 
 const ArtistThumbnail = ({ source }) => {

@@ -24,7 +24,7 @@ const SingleResultWrapper = styled.div`
 const SingleResult = ({ data }) => {
   return (
     <SingleResultWrapper>
-      <ArtistThumbnail />
+      <ArtistThumbnail source={data.imageSrc} />
       <Heart />
       <ResultsDataBox data={[data.artist, data.name]} />
       <ResultsDataBox data={[data.city, data.venue]} />
