@@ -9,9 +9,10 @@ const MainViewWrapper = styled.section`
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  background-attachment: fixed;
   display: flex;
   justify-content: center;
-  align-items: center;
+  padding: 5vh 0;
 `;
 
 const MainView = () => {

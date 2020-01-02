@@ -9,7 +9,7 @@ const ChooseQueryWrapper = styled.div`
   border-radius: 0.3125rem;
   width: 50%;
   height: 3rem;
-  margin: 0 1rem 0.7rem 1rem;
+  margin-bottom: 0.7rem;
   justify-content: space-between;
   align-items: center;
   font-family: "Work Sans", sans-serif;

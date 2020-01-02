@@ -17,13 +17,14 @@ const ContentBoxHeaderWrapper = styled.header`
   }
 `;
 
-const ContentBoxHeader = ({ changeScreen }) => {
+const ContentBoxHeader = ({ changeScreen, activeScreen }) => {
   return (
     <ContentBoxHeaderWrapper>
       <Logo />
       <Navigation
         changeScreen={changeScreen}
         navItems={["search events", "my concerts", "my artists"]}
+        activeScreen={activeScreen}
       />
       <Profile />
     </ContentBoxHeaderWrapper>

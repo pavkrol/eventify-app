@@ -18,8 +18,10 @@ const PopupWrapper = styled.div`
     background: linear-gradient(168.44deg, #151e2c 67.82%, #1a3856 93.99%);
     border-radius: 0.5625rem;
     display: flex;
+    align-content: flex-start;
     flex-wrap: wrap;
     overflow-y: scroll;
+    padding: 1rem;
     div {
       min-width: 40%;
       flex: 1;
@@ -34,7 +36,7 @@ const PopupWrapper = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
-      margin: 0 1rem 0.7rem 1rem;
+      margin-bottom: 0.7rem;
       background-color: #1a2433;
       border-radius: 0.3125rem;
     }
@@ -43,6 +45,7 @@ const PopupWrapper = styled.div`
 
 const Popup = ({ data, confirmChoice }) => {
   const artists = data.resultsPage.results.artist;
+  console.log(artists);
 
   return (
     <PopupWrapper>

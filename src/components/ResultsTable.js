@@ -34,7 +34,7 @@ const ResultsTable = ({ searchResults, noResults }) => {
     <ResultsTableWrapper>
       <h2>Search results:</h2>
       {noResults ? (
-        <h3>Sorry, but there aren't any upcoming events for that artist.</h3>
+        <h3>Sorry, but there aren't any upcoming events for this artist.</h3>
       ) : (
         searchResults.map(item => <SingleResult key={item.id} data={item} />)
       )}

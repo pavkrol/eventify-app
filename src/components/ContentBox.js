@@ -20,7 +20,10 @@ const ContentBox = () => {
   };
   return (
     <ContentBoxWrapper>
-      <ContentBoxHeader changeScreen={changeScreen} />
+      <ContentBoxHeader
+        changeScreen={changeScreen}
+        activeScreen={activeScreen}
+      />
       <ContentBoxBody activeScreen={activeScreen} />
     </ContentBoxWrapper>
   );
