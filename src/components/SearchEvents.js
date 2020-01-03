@@ -32,7 +32,23 @@ const SearchEvents = () => {
   const search = async (type, value) => {
     setFetchingData(true);
     if (type === "artist") {
-      searchArtist(value);
+      const artists_list = await searchArtist(value);
+      if (artists_list.resultsPage.results.artist.length === 1) {
+        searchEvents(
+          artists_list.resultsPage.results.artist.id,
+          artists_list.resultsPage.results.artist.displayName
+        );
+      } else {
+        chooseQuery(artists_list.resultsPage.results.artist);
+      }
+    } else if (type === "city") {
+      const cities_list = await searchCity(value);
+      console.log(cities_list);
+      if (cities_list.length === 1) {
+        searchEventsByCity(cites_list[0].id);
+      } else {
+        chooseQuery(cities_list);
+      }
     }
   };
 
@@ -41,14 +57,7 @@ const SearchEvents = () => {
       `https://api.songkick.com/api/3.0/search/artists.json?apikey=${key}&query=${artistName}`
     );
     const data = await resp.json();
-    if (data.resultsPage.results.artist.length === 1) {
-      searchEvents(
-        data.resultsPage.results.artist.id,
-        data.resultsPage.results.artist.displayName
-      );
-    } else {
-      chooseQuery(data);
-    }
+    return data;
   };
 
   const getArtistImage = async artistName => {
@@ -57,6 +66,49 @@ const SearchEvents = () => {
     );
     const imageData = await imageResp.json();
     return imageData.picture_small;
+  };
+
+  const searchCity = async city => {
+    const resp = await fetch(
+      `https://api.songkick.com/api/3.0/search/locations.json?query=${city}&apikey=${key}`
+    );
+    const data = await resp.json();
+    const cities_list = data.resultsPage.results.location.map(location => ({
+      id: location.metroArea.id,
+      name: location.city.displayName,
+      country: location.metroArea.country.displayName,
+      area: location.metroArea.displayName,
+      state:
+        location.metroArea.country.displayName === "US" ||
+        location.metroArea.country.displayName === "Canada"
+          ? location.metroArea.state.displayName
+          : null
+    }));
+    return cities_list;
+  };
+
+  const searchEventsByCity = async city_id => {
+    setNoResults(false);
+    const resp = await fetch(
+      `https://api.songkick.com/api/3.0/events.json?apikey=${key}&location=sk:${city_id}`
+    );
+    const data = await resp.json();
+    if (data.resultsPage.totalEntries) {
+      const eventsList = data.resultsPage.results.event.map(async event => ({
+        id: event.id,
+        name: event.displayName,
+        date: event.start.date,
+        artist: event.performance[0].artist.displayName,
+        city: event.location.city,
+        venue: event.venue.displayName,
+        imageSrc: await getArtistImage(event.performance[0].artist.displayName)
+      }));
+      setResults(eventsList);
+      setFetchingData(false);
+    } else {
+      setFetchingData(false);
+      setNoResults(true);
+    }
   };
 
   const searchEvents = async (artist_id, artist_name) => {
@@ -89,9 +141,9 @@ const SearchEvents = () => {
     togglePopup(!popupOpen);
   };
 
-  const confirmChoice = async (artist_id, artist_name) => {
+  const confirmChoice = async (id, name, type) => {
     togglePopup(!popupOpen);
-    searchEvents(artist_id, artist_name);
+    type === "artist" ? searchEvents(id, name) : searchEventsByCity(id);
   };
 
   return (

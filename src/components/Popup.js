@@ -44,9 +44,6 @@ const PopupWrapper = styled.div`
 `;
 
 const Popup = ({ data, confirmChoice }) => {
-  const artists = data.resultsPage.results.artist;
-  console.log(artists);
-
   return (
     <PopupWrapper>
       <div className="box">
@@ -54,12 +51,17 @@ const Popup = ({ data, confirmChoice }) => {
           There are more than one result mathing your query. Please, choose one
           of the following artists:
         </h2>
-        {artists.map(artist => {
+        {data.map(item => {
           return (
             <ChooseQuery
-              key={artist.id}
-              name={artist.displayName}
-              id={artist.id}
+              key={item.id}
+              name={
+                item.country !== undefined
+                  ? `${item.name}, ${item.state}, ${item.country}`
+                  : item.displayName
+              }
+              type={item.country !== undefined ? "city" : "artist"}
+              id={item.id}
               action={confirmChoice}
             />
           );
