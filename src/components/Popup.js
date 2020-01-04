@@ -57,7 +57,7 @@ const Popup = ({ data, confirmChoice }) => {
               key={item.id}
               name={
                 item.country !== undefined
-                  ? `${item.name}, ${item.state}, ${item.country}`
+                  ? `${item.name} ${item.state} ${item.country}`
                   : item.displayName
               }
               type={item.country !== undefined ? "city" : "artist"}

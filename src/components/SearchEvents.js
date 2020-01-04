@@ -43,9 +43,8 @@ const SearchEvents = () => {
       }
     } else if (type === "city") {
       const cities_list = await searchCity(value);
-      console.log(cities_list);
       if (cities_list.length === 1) {
-        searchEventsByCity(cites_list[0].id);
+        searchEventsByCity(cities_list[0].id);
       } else {
         chooseQuery(cities_list);
       }
@@ -82,7 +81,7 @@ const SearchEvents = () => {
         location.metroArea.country.displayName === "US" ||
         location.metroArea.country.displayName === "Canada"
           ? location.metroArea.state.displayName
-          : null
+          : ""
     }));
     return cities_list;
   };
@@ -94,15 +93,19 @@ const SearchEvents = () => {
     );
     const data = await resp.json();
     if (data.resultsPage.totalEntries) {
-      const eventsList = data.resultsPage.results.event.map(async event => ({
-        id: event.id,
-        name: event.displayName,
-        date: event.start.date,
-        artist: event.performance[0].artist.displayName,
-        city: event.location.city,
-        venue: event.venue.displayName,
-        imageSrc: await getArtistImage(event.performance[0].artist.displayName)
-      }));
+      const eventsList = data.resultsPage.results.event.map(event => {
+        return {
+          id: event.id,
+          name: event.displayName,
+          date: event.start.date,
+          artist: event.performance.length
+            ? event.performance[0].artist.displayName
+            : "TBA",
+          city: event.location.city,
+          venue: event.venue.displayName,
+          imageSrc: ""
+        };
+      });
       setResults(eventsList);
       setFetchingData(false);
     } else {
