@@ -1,20 +1,23 @@
 import React from "react";
 import styled from "styled-components";
-import EmptyButton from "./EmptyButton";
 
-const ChooseQueryWrapper = styled.div`
+const ChooseQueryWrapper = styled.button`
   display: flex;
-  padding: 0 2rem;
+  padding: 1rem 2rem;
   background-color: #1a2433;
   border-radius: 0.3125rem;
   width: 50%;
-  height: 3rem;
+  min-height: 3rem;
   margin-bottom: 0.7rem;
-  justify-content: space-between;
+  justify-content: flex-start;
+  text-align: left;
   align-items: center;
   font-family: "Work Sans", sans-serif;
   font-weight: 400;
   font-size: 0.9375rem;
+  :hover {
+    background-color: #293850;
+  }
 `;
 
 const ChooseQuery = ({ id, name, action, type }) => {
@@ -23,15 +26,8 @@ const ChooseQuery = ({ id, name, action, type }) => {
   };
 
   return (
-    <ChooseQueryWrapper>
-      <p>{name}</p>
-      <EmptyButton
-        color="#FFF"
-        height="2"
-        action={() => handleClick(id, name, type)}
-      >
-        Search
-      </EmptyButton>
+    <ChooseQueryWrapper onClick={() => handleClick(id, name, type)}>
+      {name}
     </ChooseQueryWrapper>
   );
 };

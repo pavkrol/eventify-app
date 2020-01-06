@@ -17,28 +17,35 @@ const PopupWrapper = styled.div`
     height: 60vh;
     background: linear-gradient(168.44deg, #151e2c 67.82%, #1a3856 93.99%);
     border-radius: 0.5625rem;
+    justify-content: space-between;
     display: flex;
     align-content: flex-start;
     flex-wrap: wrap;
     overflow-y: scroll;
     padding: 1rem;
-    div {
-      min-width: 40%;
-      flex: 1;
+    button {
+      flex-basis: 48%;
+      @media (max-width: 50rem) {
+        flex-basis: 100%;
+      }
     }
     h2 {
       font-family: "Work Sans", sans-serif;
       font-weight: 400;
       font-size: 1rem;
       width: 100%;
-      height: 3.75rem;
-      padding: 0 2rem;
+      min-height: 3.75rem;
+      padding: 0.8rem 2rem;
       display: flex;
       justify-content: center;
       align-items: center;
       margin-bottom: 0.7rem;
-      background-color: #1a2433;
+      background-color: #293850;
       border-radius: 0.3125rem;
+    }
+    @media (max-width: 62.5rem) {
+      width: 80vw;
+      height: 80vh;
     }
   }
 `;

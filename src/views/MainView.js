@@ -13,6 +13,9 @@ const MainViewWrapper = styled.section`
   display: flex;
   justify-content: center;
   padding: 5vh 0;
+  @media (max-width: 62.5rem) {
+    padding: 0;
+  }
 `;
 
 const MainView = () => {

@@ -10,6 +10,14 @@ const ContentBoxWrapper = styled.section`
   background: linear-gradient(168.28deg, #151e2c 67.82%, #1a3856 93.99%);
   display: flex;
   flex-direction: column;
+  @media (max-width: 62.5rem) {
+    width: 100%;
+    min-height: 100vh;
+    border-radius: 0;
+  }
+  @media (min-width: 100rem) {
+    width: 95rem;
+  }
 `;
 
 const ContentBox = () => {

@@ -15,6 +15,9 @@ const ContentBoxHeaderWrapper = styled.header`
   h1 {
     margin-right: auto;
   }
+  @media (max-width: 62.5rem) {
+    border-radius: 0;
+  }
 `;
 
 const ContentBoxHeader = ({ changeScreen, activeScreen }) => {

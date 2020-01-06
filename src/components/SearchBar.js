@@ -30,6 +30,36 @@ const SearchBarWrapper = styled.div`
     padding-left: 1rem;
     height: 2rem;
   }
+  @media (max-width: 62.5rem) {
+    padding: 0.5rem 1.5rem;
+  }
+  @media (max-width: 55rem) {
+    flex-wrap: wrap;
+    p {
+      flex-basis: 30%;
+      margin-bottom: 1rem;
+    }
+    select,
+    input {
+      flex-basis: 60%;
+      margin: 0 0 1rem 0;
+    }
+    *:last-child {
+      flex-basis: 100%;
+    }
+  }
+  @media (max-width: 25rem) {
+    p {
+      flex-basis: 100%;
+      margin-bottom: 1rem;
+    }
+    select,
+    input {
+      flex-basis: 100%;
+      max-width: 100%;
+      margin: 0 0 1rem 0;
+    }
+  }
 `;
 
 const SearchBar = ({ search }) => {

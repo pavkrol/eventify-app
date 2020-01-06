@@ -7,7 +7,7 @@ const HeartWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 2rem;
+  position: relative;
   button {
     cursor: pointer;
     width: 1rem;
@@ -16,6 +16,23 @@ const HeartWrapper = styled.div`
       props.isFull ? full_heart : empty_heart});
     background-size: contain;
     background-position: center;
+  }
+  :hover:after {
+    content: "add artist to your favourites";
+    font-family: "Work Sans", sans-serif;
+    font-size: 0.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: absolute;
+    width: 12rem;
+    padding: 0.5rem 0.7rem;
+    height: auto;
+    background-color: #273147;
+    color: #e2f1ff;
+    right: -11rem;
+    border-radius: 0.3125rem;
   }
 `;
 

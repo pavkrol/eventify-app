@@ -9,6 +9,9 @@ const SearchEventsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 3.5rem 4.7rem;
+  @media (max-width: 43rem) {
+    padding: 2rem;
+  }
 `;
 
 const SearchEvents = () => {
@@ -103,7 +106,7 @@ const SearchEvents = () => {
             : "TBA",
           city: event.location.city,
           venue: event.venue.displayName,
-          imageSrc: ""
+          uri: event.uri
         };
       });
       setResults(eventsList);
@@ -129,7 +132,8 @@ const SearchEvents = () => {
         artist: artist_name,
         city: event.location.city,
         venue: event.venue.displayName,
-        imageSrc: imageSrc
+        imageSrc: imageSrc,
+        uri: event.uri
       }));
       setResults(eventsList);
       setFetchingData(false);

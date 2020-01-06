@@ -12,7 +12,6 @@ const ResultsDataBoxWrapper = styled.div`
     font-weight: 400;
     line-height: 1.5rem;
     font-size: 0.875rem;
-    letter-spacing: 0.16em;
     color: #a5abbd;
   }
   p:first-child {
