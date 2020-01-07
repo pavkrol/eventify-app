@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Logo from "./Logo";
 import Navigation from "./Navigation";
 import Profile from "./Profile";
+import HamburgerMenu from "./HamburgerMenu";
 
 const ContentBoxHeaderWrapper = styled.header`
   display: flex;
@@ -18,9 +19,14 @@ const ContentBoxHeaderWrapper = styled.header`
   @media (max-width: 62.5rem) {
     border-radius: 0;
   }
+  @media (max-width: 43rem) {
+    padding: 0 2rem;
+  }
 `;
 
 const ContentBoxHeader = ({ changeScreen, activeScreen }) => {
+  const [isMenuOpen, toggleMenu] = useState(false);
+
   return (
     <ContentBoxHeaderWrapper>
       <Logo />
@@ -28,8 +34,10 @@ const ContentBoxHeader = ({ changeScreen, activeScreen }) => {
         changeScreen={changeScreen}
         navItems={["search events", "my concerts", "my artists"]}
         activeScreen={activeScreen}
+        isMenuOpen={isMenuOpen}
+        toggleMenu={toggleMenu}
       />
-      <Profile />
+      <HamburgerMenu isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
     </ContentBoxHeaderWrapper>
   );
 };

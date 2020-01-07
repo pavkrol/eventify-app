@@ -35,6 +35,10 @@ const LogoWrapper = styled.h1`
     );
     border-radius: 2.25em 0px;
   }
+  @media (max-width: 25rem) {
+    font-size: 1.5rem;
+    justify-content: flex-start;
+  }
 `;
 
 const Logo = () => {

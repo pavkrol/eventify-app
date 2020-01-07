@@ -10,6 +10,9 @@ const ProfileWrapper = styled.button`
   color: #e2f1ff;
   background-color: #1f2c3e;
   border-radius: 0.3125rem;
+  @media (max-width: 62.5rem) {
+    margin-top: 0.8rem;
+  }
 `;
 
 const Profile = () => {

@@ -13,6 +13,9 @@ const GlobalStyle = createGlobalStyle`
 html {
   color: #fff;
 }
+body {
+  overflow-x: hidden;
+}
 textarea,
 input.text,
 input[type="text"],
