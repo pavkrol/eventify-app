@@ -46,7 +46,8 @@ const Navigation = ({
   changeScreen,
   activeScreen,
   isMenuOpen,
-  toggleMenu
+  toggleMenu,
+  toggleAuthModal
 }) => {
   return (
     <NavigationWrapper isMenuOpen={isMenuOpen}>
@@ -63,7 +64,7 @@ const Navigation = ({
           </NavItem>
         </li>
       ))}
-      <Profile />
+      <Profile toggleAuthModal={toggleAuthModal} />
     </NavigationWrapper>
   );
 };

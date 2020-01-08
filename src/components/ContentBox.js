@@ -20,7 +20,7 @@ const ContentBoxWrapper = styled.section`
   }
 `;
 
-const ContentBox = () => {
+const ContentBox = ({ toggleAuthModal }) => {
   const [activeScreen, setActiveScreen] = useState("search events");
 
   const changeScreen = screen => {
@@ -31,6 +31,7 @@ const ContentBox = () => {
       <ContentBoxHeader
         changeScreen={changeScreen}
         activeScreen={activeScreen}
+        toggleAuthModal={toggleAuthModal}
       />
       <ContentBoxBody activeScreen={activeScreen} />
     </ContentBoxWrapper>

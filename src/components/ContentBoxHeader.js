@@ -24,7 +24,7 @@ const ContentBoxHeaderWrapper = styled.header`
   }
 `;
 
-const ContentBoxHeader = ({ changeScreen, activeScreen }) => {
+const ContentBoxHeader = ({ changeScreen, activeScreen, toggleAuthModal }) => {
   const [isMenuOpen, toggleMenu] = useState(false);
 
   return (
@@ -36,6 +36,7 @@ const ContentBoxHeader = ({ changeScreen, activeScreen }) => {
         activeScreen={activeScreen}
         isMenuOpen={isMenuOpen}
         toggleMenu={toggleMenu}
+        toggleAuthModal={toggleAuthModal}
       />
       <HamburgerMenu isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
     </ContentBoxHeaderWrapper>

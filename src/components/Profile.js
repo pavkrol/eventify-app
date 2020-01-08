@@ -15,8 +15,8 @@ const ProfileWrapper = styled.button`
   }
 `;
 
-const Profile = () => {
-  return <ProfileWrapper>Profile</ProfileWrapper>;
+const Profile = ({ toggleAuthModal }) => {
+  return <ProfileWrapper onClick={toggleAuthModal}>Profile</ProfileWrapper>;
 };
 
 export default Profile;

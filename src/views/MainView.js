@@ -18,10 +18,10 @@ const MainViewWrapper = styled.section`
   }
 `;
 
-const MainView = () => {
+const MainView = ({ toggleAuthModal }) => {
   return (
     <MainViewWrapper>
-      <ContentBox />
+      <ContentBox toggleAuthModal={toggleAuthModal} />
     </MainViewWrapper>
   );
 };

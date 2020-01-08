@@ -1,20 +1,30 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import BasicButton from "./BasicButton";
+import ModalHeader from "./ModalHeader";
+import InputBox from "./InputBox";
 
-const SignUpWrapper = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
+const SignUpWrapper = styled.form`
+  h2 {
+    height: 4rem;
+    margin-bottom: 1rem;
+  }
+`;
+
+const Submit = styled.input`
+  padding: 0 1.5rem;
+  height: 3rem;
+  background-color: #0093ff;
+  border: none;
+  border-radius: 0.3125rem;
+  color: #fff;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.1em;
   width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.7);
-  form {
-    background-color: white;
-    width: 500px;
-    height: 800px;
+  cursor: pointer;
+  :hover {
+    background-color: #0093ff80;
   }
 `;
 
@@ -29,8 +39,9 @@ const SignUp = () => {
 
   return (
     <SignUpWrapper onSubmit={handleSubmit}>
-      <form>
-        <h2>Sign Up</h2>
+      <ModalHeader>Sign Up</ModalHeader>
+      <InputBox>
+        <p>Profile name</p>
         <input
           type="text"
           name="displayName"
@@ -38,6 +49,9 @@ const SignUp = () => {
           value={displayName}
           onChange={e => setDisplayName(e.target.value)}
         />
+      </InputBox>
+      <InputBox>
+        <p>E-mail:</p>
         <input
           type="email"
           name="email"
@@ -45,6 +59,9 @@ const SignUp = () => {
           value={email}
           onChange={e => setEmail(e.target.value)}
         />
+      </InputBox>
+      <InputBox>
+        <p>Password</p>
         <input
           type="password"
           name="password"
@@ -52,8 +69,8 @@ const SignUp = () => {
           value={password}
           onChange={e => setPassword(e.target.value)}
         />
-        <input type="submit" value="Sign Up" />
-      </form>
+      </InputBox>
+      <Submit type="submit" value="Sign Up" />
     </SignUpWrapper>
   );
 };

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Router } from "@reach/router";
+import { auth } from "../firebase";
 import GlobalStyle from "../GlobalStyle";
 import Hero from "../views/Hero";
 import MainView from "../views/MainView";
@@ -10,6 +11,19 @@ class App extends Component {
     user: null,
     openAuthModal: false
   };
+
+  unsubscribeFromAuth = null;
+
+  componentDidMount = async () => {
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(user =>
+      this.setState({ user })
+    );
+  };
+
+  toggleAuthModal = () => {
+    this.setState({ openAuthModal: !this.state.openAuthModal });
+  };
+
   render() {
     const { user, openAuthModal } = this.state;
     return (
@@ -17,11 +31,15 @@ class App extends Component {
         <GlobalStyle />
         <main>
           {openAuthModal && (
-            <Authentication user={user} openAuthModal={openAuthModal} />
+            <Authentication
+              user={user}
+              openAuthModal={openAuthModal}
+              toggleAuthModal={this.toggleAuthModal}
+            />
           )}
           <Router>
             <Hero path="/" />
-            <MainView path="search" />
+            <MainView path="search" toggleAuthModal={this.toggleAuthModal} />
           </Router>
         </main>
       </>
