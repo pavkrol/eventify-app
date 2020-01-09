@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import BasicButton from "./BasicButton";
+import { auth, createUserProfileDocument } from "../firebase";
 import ModalHeader from "./ModalHeader";
 import InputBox from "./InputBox";
 
@@ -33,12 +33,25 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [displayName, setDisplayName] = useState("");
 
-  const handleSubmit = event => {
-    event.preventDefault();
+  const handleSubmit = async (email, password, displayName) => {
+    try {
+      const { user } = await auth.createUserWithEmailAndPassword(
+        email,
+        password
+      );
+      createUserProfileDocument(user, { displayName });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
-    <SignUpWrapper onSubmit={handleSubmit}>
+    <SignUpWrapper
+      onSubmit={event => {
+        event.preventDefault();
+        handleSubmit(email, password, displayName);
+      }}
+    >
       <ModalHeader>Sign Up</ModalHeader>
       <InputBox>
         <p>Profile name</p>

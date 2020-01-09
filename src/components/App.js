@@ -1,50 +1,35 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { Router } from "@reach/router";
-import { auth } from "../firebase";
+import UserProvider from "../providers/UserProvider";
 import GlobalStyle from "../GlobalStyle";
 import Hero from "../views/Hero";
 import MainView from "../views/MainView";
 import Authentication from "./Authentication";
 
-class App extends Component {
-  state = {
-    user: null,
-    openAuthModal: false
+const App = () => {
+  const [openAuthModal, setAuthModal] = useState(false);
+
+  const toggleAuthModal = () => {
+    setAuthModal(!openAuthModal);
   };
 
-  unsubscribeFromAuth = null;
-
-  componentDidMount = async () => {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(user =>
-      this.setState({ user })
-    );
-  };
-
-  toggleAuthModal = () => {
-    this.setState({ openAuthModal: !this.state.openAuthModal });
-  };
-
-  render() {
-    const { user, openAuthModal } = this.state;
-    return (
-      <>
-        <GlobalStyle />
-        <main>
-          {openAuthModal && (
-            <Authentication
-              user={user}
-              openAuthModal={openAuthModal}
-              toggleAuthModal={this.toggleAuthModal}
-            />
-          )}
-          <Router>
-            <Hero path="/" />
-            <MainView path="search" toggleAuthModal={this.toggleAuthModal} />
-          </Router>
-        </main>
-      </>
-    );
-  }
-}
+  return (
+    <UserProvider>
+      <GlobalStyle />
+      <main>
+        {openAuthModal && (
+          <Authentication
+            openAuthModal={openAuthModal}
+            toggleAuthModal={toggleAuthModal}
+          />
+        )}
+        <Router>
+          <Hero path="/" />
+          <MainView path="search" toggleAuthModal={toggleAuthModal} />
+        </Router>
+      </main>
+    </UserProvider>
+  );
+};
 
 export default App;

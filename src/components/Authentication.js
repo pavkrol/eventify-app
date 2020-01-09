@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import CurrentUser from "./CurrentUser";
 import SignInAndSignUp from "./SignInAndSignUp";
+import { UserContext } from "../providers/UserProvider";
 import styled from "styled-components";
 
 const AuthenticationWrapper = styled.div`
@@ -16,7 +17,8 @@ const AuthenticationWrapper = styled.div`
   color: #000;
 `;
 
-const Authentication = ({ user, loading, toggleAuthModal }) => {
+const Authentication = ({ loading, toggleAuthModal }) => {
+  const user = useContext(UserContext);
   if (loading) return null;
   return (
     <AuthenticationWrapper>

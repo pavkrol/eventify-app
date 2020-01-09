@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { signOut } from "../firebase";
 import BasicButton from "./BasicButton";
 import ModalHeader from "./ModalHeader";
+import defaultUserPic from "../img/default_user.png";
 
 const CurrentUserWrapper = styled.section`
   width: 35rem;
@@ -49,14 +50,15 @@ const CurrentUser = ({
   return (
     <CurrentUserWrapper>
       <ModalHeader>User Profile</ModalHeader>
-      {photoURL && <img src={photoURL} alt={displayName} />}
+      {photoURL ? (
+        <img src={photoURL} alt={displayName} />
+      ) : (
+        <img src={defaultUserPic} alt="default user photo" />
+      )}
       <UserDetails>
         <p>User name: {displayName}</p>
         <p>E-mail address: {email}</p>
-        <p>
-          Joined: {createdAt.getDate()}/{createdAt.getMonth() + 1}/
-          {createdAt.getFullYear()}
-        </p>
+        <p>Joined: {createdAt}</p>
       </UserDetails>
       <BasicButton height="2.4" color="#2BCA91" action={signOut}>
         Sign Out

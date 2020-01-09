@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { signInWithGoogle } from "../firebase";
+import { signInWithGoogle, signInWithEmail } from "../firebase";
 import BasicButton from "./BasicButton";
 import ModalHeader from "./ModalHeader";
 import InputBox from "./InputBox";
@@ -38,12 +38,18 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = event => {
-    event.preventDefault();
+  const handleSubmit = (email, password) => {
+    console.log(email, password);
+    signInWithEmail(email, password);
   };
 
   return (
-    <SignInWrapper onSubmit={handleSubmit}>
+    <SignInWrapper
+      onSubmit={event => {
+        event.preventDefault();
+        handleSubmit(email, password);
+      }}
+    >
       <ModalHeader>Sign In</ModalHeader>
       <InputBox>
         <p>E-mail:</p>
