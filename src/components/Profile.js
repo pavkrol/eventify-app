@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import { UserContext } from "../providers/UserProvider";
 
 const ProfileWrapper = styled.button`
   font-family: "Work Sans";
@@ -16,7 +17,13 @@ const ProfileWrapper = styled.button`
 `;
 
 const Profile = ({ toggleAuthModal }) => {
-  return <ProfileWrapper onClick={toggleAuthModal}>Profile</ProfileWrapper>;
+  const user = useContext(UserContext);
+
+  return (
+    <ProfileWrapper onClick={toggleAuthModal}>
+      {user ? "Profile" : "Sign In"}
+    </ProfileWrapper>
+  );
 };
 
 export default Profile;

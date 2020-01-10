@@ -25,7 +25,7 @@ const Authentication = ({ loading, toggleAuthModal }) => {
       {user ? (
         <CurrentUser {...user} toggleAuthModal={toggleAuthModal} />
       ) : (
-        <SignInAndSignUp />
+        <SignInAndSignUp toggleAuthModal={toggleAuthModal} />
       )}
     </AuthenticationWrapper>
   );

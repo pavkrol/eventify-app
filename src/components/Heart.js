@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
+import { UserContext } from "../providers/UserProvider";
+import Alert from "./Alert";
 import full_heart from "../img/heart.png";
 import empty_heart from "../img/empty_heart.png";
 
@@ -8,7 +10,7 @@ const HeartWrapper = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
-  button {
+  > button {
     cursor: pointer;
     width: 1rem;
     height: 1rem;
@@ -17,30 +19,29 @@ const HeartWrapper = styled.div`
     background-size: contain;
     background-position: center;
   }
-  :hover:after {
-    content: "add artist to your favourites";
-    font-family: "Work Sans", sans-serif;
-    font-size: 0.8rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    position: absolute;
-    width: 12rem;
-    padding: 0.5rem 0.7rem;
-    height: auto;
-    background-color: #273147;
-    color: #e2f1ff;
-    right: -11rem;
-    border-radius: 0.3125rem;
-  }
 `;
 
 const Heart = () => {
   const [isFull, toggleHeart] = useState(false);
+  const [alert, setAlert] = useState(false);
+  const user = useContext(UserContext);
+
+  const toggleAlert = () => {
+    setAlert(!alert);
+  };
+
   return (
     <HeartWrapper isFull={isFull}>
-      <button onClick={() => toggleHeart(!isFull)} />
+      {alert && (
+        <Alert action={toggleAlert}>
+          You need to be logged in to add artist to favourites
+        </Alert>
+      )}
+      <button
+        onClick={() => {
+          user ? toggleHeart(!isFull) : toggleAlert();
+        }}
+      />
     </HeartWrapper>
   );
 };
