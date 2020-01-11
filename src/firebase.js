@@ -61,4 +61,25 @@ export const getUserDocument = async uid => {
   }
 };
 
+export const addFavourites = async (uid, artistId) => {
+  console.log(uid, artistId);
+  if (!uid) return;
+
+  const userDatabaseRef = firestore.doc(`users/${uid}/favouriteArtists`);
+  const snapshot = await userDatabaseRef.get();
+  if (!snapshot.exists) {
+    try {
+      await userDatabaseRef.set({ favouriteArtists: artistId });
+    } catch (error) {
+      console.error("Error updating user", error);
+    }
+  } else {
+    try {
+      await userDatabaseRef.update({ favouriteArtists: artistId });
+    } catch (error) {
+      console.error("Error updating user", error);
+    }
+  }
+};
+
 export default firebase;

@@ -1,9 +1,44 @@
-import React from "react";
+import React, { useState, useContext } from "react";
+import { UserContext } from "../providers/UserProvider";
+import Alert from "./Alert";
 import styled from "styled-components";
 import ArtistThumbnail from "./ArtistThumbnail";
 import Heart from "./Heart";
 import ResultsDataBox from "./ResultsDataBox";
 import EmptyButton from "./EmptyButton";
+
+const SingleResult = ({ data }) => {
+  const [alert, setAlert] = useState(false);
+  const user = useContext(UserContext);
+  const toggleAlert = () => {
+    setAlert(!alert);
+  };
+
+  const handleAddToCalendar = () => {
+    user ? console.log("add to calendar") : toggleAlert();
+  };
+
+  return (
+    <SingleResultWrapper>
+      {alert && (
+        <Alert action={toggleAlert}>
+          You need to be logged in to add artist to favourites
+        </Alert>
+      )}
+      <ArtistThumbnail source={data.imageSrc} />
+      <Heart artistId={data.artistId} />
+      <ResultsDataBox data={[data.artist, data.name]} />
+      <ResultsDataBox data={[data.city, data.venue]} />
+      <ResultsDataBox data={[data.date]} />
+      <EmptyButton height="2.5" color="#E2F1FF" action={handleAddToCalendar}>
+        Add to calendar
+      </EmptyButton>
+      <TicketsLink href={data.uri}>Buy ticket</TicketsLink>
+    </SingleResultWrapper>
+  );
+};
+
+export default SingleResult;
 
 const SingleResultWrapper = styled.div`
   width: 100%;
@@ -141,25 +176,3 @@ const TicketsLink = styled.a`
     background-color: #0093ff80;
   }
 `;
-
-const SingleResult = ({ data }) => {
-  return (
-    <SingleResultWrapper>
-      <ArtistThumbnail source={data.imageSrc} />
-      <Heart />
-      <ResultsDataBox data={[data.artist, data.name]} />
-      <ResultsDataBox data={[data.city, data.venue]} />
-      <ResultsDataBox data={[data.date]} />
-      <EmptyButton
-        height="2.5"
-        color="#E2F1FF"
-        action={() => console.log("add to calendar")}
-      >
-        Add to calendar
-      </EmptyButton>
-      <TicketsLink href={data.uri}>Buy ticket</TicketsLink>
-    </SingleResultWrapper>
-  );
-};
-
-export default SingleResult;

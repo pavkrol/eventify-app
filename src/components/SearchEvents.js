@@ -133,7 +133,8 @@ const SearchEvents = () => {
         city: event.location.city,
         venue: event.venue.displayName,
         imageSrc: imageSrc,
-        uri: event.uri
+        uri: event.uri,
+        artistId: artist_id
       }));
       setResults(eventsList);
       setFetchingData(false);
