@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import styled from "styled-components";
 import { UserContext } from "../providers/UserProvider";
 import { addFavourites } from "../firebase";
@@ -35,6 +35,13 @@ const Heart = ({ artistId }) => {
     toggleHeart(!isFull);
     addFavourites(uid, value);
   };
+
+  useEffect(() => {
+    user.favouriteArtists &&
+    user.favouriteArtists.find(artist => artist === artistId)
+      ? toggleHeart(true)
+      : toggleHeart(false);
+  });
 
   return (
     <HeartWrapper isFull={isFull}>

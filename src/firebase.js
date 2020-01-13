@@ -61,21 +61,52 @@ export const getUserDocument = async uid => {
   }
 };
 
+export const getUserRef = async uid => {
+  if (!uid) return null;
+  try {
+    return firestore.collection("users").doc(uid);
+  } catch (error) {
+    console.error("Error fetching user", error.message);
+  }
+};
+
+export const getFavouriteArtists = async uid => {
+  if (!uid) return null;
+  try {
+    const userDocument = await firestore
+      .collection("users")
+      .doc(uid)
+      .get();
+    return userDocument.data(favouriteArtists);
+  } catch (error) {
+    console.error("Error fetching user", error.message);
+  }
+};
+
 export const addFavourites = async (uid, artistId) => {
-  console.log(uid, artistId);
   if (!uid) return;
 
-  const userDatabaseRef = firestore.doc(`users/${uid}/favouriteArtists`);
-  const snapshot = await userDatabaseRef.get();
-  if (!snapshot.exists) {
+  const data = await getUserDocument(uid);
+  const userDatabaseRef = firestore.doc(`users/${uid}`);
+  let currentArtists = data.favouriteArtists;
+  if (currentArtists) {
+    if (currentArtists.find(artist => artist === artistId)) {
+      currentArtists = currentArtists.filter(artist => artist !== artistId);
+    } else {
+      currentArtists = [artistId, ...currentArtists];
+    }
     try {
-      await userDatabaseRef.set({ favouriteArtists: artistId });
+      await userDatabaseRef.update({
+        favouriteArtists: currentArtists
+      });
     } catch (error) {
       console.error("Error updating user", error);
     }
   } else {
     try {
-      await userDatabaseRef.update({ favouriteArtists: artistId });
+      await userDatabaseRef.update({
+        favouriteArtists: [artistId]
+      });
     } catch (error) {
       console.error("Error updating user", error);
     }
