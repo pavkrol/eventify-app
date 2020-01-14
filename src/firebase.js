@@ -83,17 +83,17 @@ export const getFavouriteArtists = async uid => {
   }
 };
 
-export const addFavourites = async (uid, artistId) => {
+export const addFavourites = async (uid, artistId, artistName) => {
   if (!uid) return;
 
   const data = await getUserDocument(uid);
   const userDatabaseRef = firestore.doc(`users/${uid}`);
   let currentArtists = data.favouriteArtists;
-  if (currentArtists) {
-    if (currentArtists.find(artist => artist === artistId)) {
-      currentArtists = currentArtists.filter(artist => artist !== artistId);
+  if (currentArtists.length) {
+    if (currentArtists.find(artist => artist.id === artistId)) {
+      currentArtists = currentArtists.filter(artist => artist.id !== artistId);
     } else {
-      currentArtists = [artistId, ...currentArtists];
+      currentArtists = [{ id: artistId, name: artistName }, ...currentArtists];
     }
     try {
       await userDatabaseRef.update({
@@ -105,7 +105,7 @@ export const addFavourites = async (uid, artistId) => {
   } else {
     try {
       await userDatabaseRef.update({
-        favouriteArtists: [artistId]
+        favouriteArtists: [{ id: artistId, name: artistName }]
       });
     } catch (error) {
       console.error("Error updating user", error);

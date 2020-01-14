@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Router } from "@reach/router";
 import UserProvider from "../providers/UserProvider";
+import KeyProvider from "../providers/KeyProvider";
 import GlobalStyle from "../GlobalStyle";
 import Hero from "../views/Hero";
 import MainView from "../views/MainView";
@@ -14,21 +15,23 @@ const App = () => {
   };
 
   return (
-    <UserProvider>
-      <GlobalStyle />
-      <main>
-        {openAuthModal && (
-          <Authentication
-            openAuthModal={openAuthModal}
-            toggleAuthModal={toggleAuthModal}
-          />
-        )}
-        <Router>
-          <Hero path="/" />
-          <MainView path="search" toggleAuthModal={toggleAuthModal} />
-        </Router>
-      </main>
-    </UserProvider>
+    <KeyProvider>
+      <UserProvider>
+        <GlobalStyle />
+        <main>
+          {openAuthModal && (
+            <Authentication
+              openAuthModal={openAuthModal}
+              toggleAuthModal={toggleAuthModal}
+            />
+          )}
+          <Router>
+            <Hero path="/" />
+            <MainView path="search" toggleAuthModal={toggleAuthModal} />
+          </Router>
+        </main>
+      </UserProvider>
+    </KeyProvider>
   );
 };
 

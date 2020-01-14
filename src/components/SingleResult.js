@@ -26,7 +26,7 @@ const SingleResult = ({ data }) => {
         </Alert>
       )}
       <ArtistThumbnail source={data.imageSrc} />
-      <Heart artistId={data.artistId} />
+      <Heart artistId={data.artistId} artistName={data.artist} />
       <ResultsDataBox data={[data.artist, data.name]} />
       <ResultsDataBox data={[data.city, data.venue]} />
       <ResultsDataBox data={[data.date]} />

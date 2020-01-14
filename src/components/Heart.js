@@ -22,7 +22,7 @@ const HeartWrapper = styled.div`
   }
 `;
 
-const Heart = ({ artistId }) => {
+const Heart = ({ artistId, artistName }) => {
   const [isFull, toggleHeart] = useState(false);
   const [alert, setAlert] = useState(false);
   const user = useContext(UserContext);
@@ -31,14 +31,14 @@ const Heart = ({ artistId }) => {
     setAlert(!alert);
   };
 
-  const handleAddToFavourites = (uid, value) => {
+  const handleAddToFavourites = (uid, artistId, artistName) => {
     toggleHeart(!isFull);
-    addFavourites(uid, value);
+    addFavourites(uid, artistId, artistName);
   };
 
   useEffect(() => {
     if (user && user.favouriteArtists.length) {
-      user.favouriteArtists.find(artist => artist === artistId)
+      user.favouriteArtists.find(artist => artist.id === artistId)
         ? toggleHeart(true)
         : toggleHeart(false);
     }
@@ -53,7 +53,9 @@ const Heart = ({ artistId }) => {
       )}
       <button
         onClick={() => {
-          user ? handleAddToFavourites(user.uid, artistId) : toggleAlert();
+          user
+            ? handleAddToFavourites(user.uid, artistId, artistName)
+            : toggleAlert();
         }}
       />
     </HeartWrapper>
