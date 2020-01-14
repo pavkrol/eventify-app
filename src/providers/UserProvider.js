@@ -14,6 +14,7 @@ class UserProvider extends Component {
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       const user = await createUserProfileDocument(userAuth);
       this.setState({ user });
+
       if (userAuth) {
         const userRef = await getUserRef(userAuth.uid);
         userRef.onSnapshot(snapshot => {
@@ -25,7 +26,6 @@ class UserProvider extends Component {
           });
         });
       }
-      this.setState({ user: userAuth });
     });
   };
 

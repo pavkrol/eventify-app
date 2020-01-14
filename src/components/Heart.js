@@ -37,10 +37,11 @@ const Heart = ({ artistId }) => {
   };
 
   useEffect(() => {
-    user.favouriteArtists &&
-    user.favouriteArtists.find(artist => artist === artistId)
-      ? toggleHeart(true)
-      : toggleHeart(false);
+    if (user && user.favouriteArtists.length) {
+      user.favouriteArtists.find(artist => artist === artistId)
+        ? toggleHeart(true)
+        : toggleHeart(false);
+    }
   });
 
   return (
