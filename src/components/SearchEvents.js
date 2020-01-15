@@ -4,6 +4,7 @@ import SearchBar from "./SearchBar";
 import SearchResults from "./SearchResults";
 import { firestore } from "../firebase";
 import Popup from "./Popup";
+import { getArtistImage } from "../utilities";
 
 const SearchEventsWrapper = styled.div`
   display: flex;
@@ -60,14 +61,6 @@ const SearchEvents = () => {
     );
     const data = await resp.json();
     return data;
-  };
-
-  const getArtistImage = async artistName => {
-    const imageResp = await fetch(
-      `https://cors-anywhere.herokuapp.com/https://api.deezer.com/artist/${artistName}`
-    );
-    const imageData = await imageResp.json();
-    return imageData.picture_small;
   };
 
   const searchCity = async city => {
