@@ -16,6 +16,13 @@ const FavouriteArtistsWrapper = styled.section`
     font-weight: 500;
     font-size: 1.3rem;
   }
+  .info {
+    font-weight: 300;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 const FavouriteArtists = () => {
@@ -28,9 +35,15 @@ const FavouriteArtists = () => {
   return (
     <FavouriteArtistsWrapper>
       <h2>Favourite Artists</h2>
-      {user.favouriteArtists.map(artist => (
-        <ArtistDetails key={artist.id} artist={artist} />
-      ))}
+      {!user ? (
+        <h3 className="info">
+          You need to sign in to display favourite artists.
+        </h3>
+      ) : (
+        user.favouriteArtists.map(artist => (
+          <ArtistDetails key={artist.id} artist={artist} />
+        ))
+      )}
     </FavouriteArtistsWrapper>
   );
 };

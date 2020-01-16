@@ -3,7 +3,12 @@ import { TweenMax } from "gsap";
 import styled from "styled-components";
 
 const LoaderWrapper = styled.div`
-  margin: 2rem;
+  padding: 2rem;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Loader = () => {
