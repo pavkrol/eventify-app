@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { UserContext } from "../providers/UserProvider";
 import Alert from "./Alert";
 import styled from "styled-components";
@@ -6,9 +6,11 @@ import ArtistThumbnail from "./ArtistThumbnail";
 import Heart from "./Heart";
 import ResultsDataBox from "./ResultsDataBox";
 import EmptyButton from "./EmptyButton";
+import { getArtistImage } from "../utilities";
 
 const SingleResult = ({ data }) => {
   const [alert, setAlert] = useState(false);
+  const [imageSrc, setImageSrc] = useState(null);
   const user = useContext(UserContext);
   const toggleAlert = () => {
     setAlert(!alert);
@@ -18,6 +20,14 @@ const SingleResult = ({ data }) => {
     user ? console.log("add to calendar") : toggleAlert();
   };
 
+  useEffect(() => {
+    const fetchImageSource = async () => {
+      const image = await getArtistImage(data.artist);
+      setImageSrc(image);
+    };
+    fetchImageSource();
+  }, []);
+
   return (
     <SingleResultWrapper>
       {alert && (
@@ -25,7 +35,7 @@ const SingleResult = ({ data }) => {
           You need to be logged in to add artist to favourites
         </Alert>
       )}
-      <ArtistThumbnail source={data.imageSrc} />
+      <ArtistThumbnail source={imageSrc} />
       <Heart artistId={data.artistId} artistName={data.artist} />
       <ResultsDataBox data={[data.artist, data.name]} />
       <ResultsDataBox data={[data.city, data.venue]} />

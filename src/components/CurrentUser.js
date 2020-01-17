@@ -12,7 +12,7 @@ const CurrentUserWrapper = styled.section`
   height: 35rem;
   background: linear-gradient(162.05deg, #151e2c 67.82%, #1a3856 93.99%);
   border-radius: 0.5rem;
-  padding: 3.6rem 1rem 1rem 1rem;
+  padding: 1rem 1rem 1rem 1rem;
   display: grid;
   grid-template-rows: 4rem 11.25rem 1fr;
   grid-template-columns: 11.25rem 1fr;
@@ -32,8 +32,8 @@ const CurrentUserWrapper = styled.section`
   button:last-child {
     width: 1.6rem;
     position: absolute;
-    right: 1rem;
-    top: 1rem;
+    right: 1.7rem;
+    top: 2.2rem;
   }
 `;
 

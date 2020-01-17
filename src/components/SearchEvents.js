@@ -39,8 +39,8 @@ const SearchEvents = () => {
       const artists_list = await searchArtist(value);
       if (artists_list.resultsPage.results.artist.length === 1) {
         searchEvents(
-          artists_list.resultsPage.results.artist.id,
-          artists_list.resultsPage.results.artist.displayName
+          artists_list.resultsPage.results.artist[0].id,
+          artists_list.resultsPage.results.artist[0].displayName
         );
       } else {
         chooseQuery(artists_list.resultsPage.results.artist);
@@ -97,6 +97,9 @@ const SearchEvents = () => {
           artist: event.performance.length
             ? event.performance[0].artist.displayName
             : "TBA",
+          artistId: event.performance.length
+            ? event.performance[0].artist.displayName
+            : "n/a",
           city: event.location.city,
           venue: event.venue.displayName,
           uri: event.uri
@@ -116,7 +119,6 @@ const SearchEvents = () => {
       `https://api.songkick.com/api/3.0/artists/${artist_id}/calendar.json?apikey=${key}`
     );
     const data = await resp.json();
-    const imageSrc = await getArtistImage(artist_name);
     if (data.resultsPage.totalEntries) {
       const eventsList = data.resultsPage.results.event.map(event => ({
         id: event.id,
@@ -125,7 +127,6 @@ const SearchEvents = () => {
         artist: artist_name,
         city: event.location.city,
         venue: event.venue.displayName,
-        imageSrc: imageSrc,
         uri: event.uri,
         artistId: artist_id
       }));

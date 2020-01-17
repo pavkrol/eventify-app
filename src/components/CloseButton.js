@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const CloseButtonWrapper = styled.button`
-  background-color: #293850;
+  background-color: #151e2c;
   color: #e2f1ff;
   border-radius: 0.3125rem;
   width: 1.6rem;

@@ -3,13 +3,14 @@ import styled from "styled-components";
 import { KeyContext } from "../providers/KeyProvider";
 import { getArtistImage } from "../utilities";
 import Loader from "./Loader";
+import defaultImage from "../img/default.jpg";
 
 const ArtistDetailsWrapper = styled.div`
   margin: 1rem 0;
   display: grid;
   grid-template-columns: 15rem 1fr 1fr;
   grid-template-rows: 15rem auto;
-  grid-gap: 1rem;
+  grid-gap: 1rem 2rem;
   font-family: "Work Sans", sans-serif;
   color: #e2f1ff;
   img {
@@ -70,7 +71,10 @@ const ArtistDetails = ({ artist }) => {
           };
         }
       });
-      const upcomingEvents = events.slice(0, 3);
+      const upcomingEvents =
+        data.resultsPage.totalEntries > 2
+          ? events.slice(0, 3)
+          : events.slice(0, data.resultsPage.totalEntries);
       return upcomingEvents;
     }
   };
@@ -105,7 +109,7 @@ const ArtistDetails = ({ artist }) => {
       {isLoading ? (
         <Loader />
       ) : (
-        <img src={artistImage} alt={artist.name + " image"} />
+        <img src={artistImage || defaultImage} alt={artist.name + " image"} />
       )}
       <ArtistData>
         <h3>{artist.name}</h3>

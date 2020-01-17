@@ -11,9 +11,11 @@ const SignInAndSignUpWrapper = styled.div`
   padding: 1rem;
   display: flex;
   flex-direction: column;
+  position: relative;
   > button {
-    align-self: flex-end;
-    margin-bottom: 1rem;
+    position: absolute;
+    right: 1.7rem;
+    top: 2.2rem;
   }
 `;
 

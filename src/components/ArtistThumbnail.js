@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import defaultImage from "../img/note.png";
+import defaultImage from "../img/default.jpg";
 
 const ArtistThumbnailImage = styled.img`
   object-fit: contain;
@@ -9,11 +9,10 @@ const ArtistThumbnailImage = styled.img`
   height: 3.75rem;
   background-color: #dcdcdc;
   border-radius: 0.3rem;
-  padding: ${props => (props.source !== defaultImage ? "0" : "0.8rem")};
 `;
 
 const ArtistThumbnail = ({ source }) => {
-  return <ArtistThumbnailImage src={source} />;
+  return <ArtistThumbnailImage src={source || defaultImage} />;
 };
 
 export default ArtistThumbnail;
