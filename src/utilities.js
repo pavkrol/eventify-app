@@ -10,3 +10,16 @@ export const getArtistImage = async artistName => {
     console.error("Error fetching artist image", error);
   }
 };
+
+export const getSimilarArtists = async (artistId, key) => {
+  try {
+    const resp = await fetch(
+      `https://api.songkick.com/api/3.0/artists/${artistId}/similar_artists.json?apikey=${key}`
+    );
+    const similarArtists = await resp.json();
+
+    return similarArtists.resultsPage.results.artist;
+  } catch (error) {
+    console.error("Error fetching similar artists", error);
+  }
+};

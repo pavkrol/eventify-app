@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { KeyContext } from "../providers/KeyProvider";
 import { getArtistImage } from "../utilities";
 import Loader from "./Loader";
+import SimilarArtists from "./SimilarArtists";
 import defaultImage from "../img/default.jpg";
 
 const ArtistDetailsWrapper = styled.div`
@@ -46,8 +47,6 @@ const ArtistData = styled.div`
     font-weight: 300;
   }
 `;
-
-const SimilarArtists = styled.ul``;
 
 const ArtistDetails = ({ artist }) => {
   const [isLoading, setLoading] = useState(false);
@@ -118,8 +117,8 @@ const ArtistDetails = ({ artist }) => {
         </h4>
         <h4>Upcoming concerts: </h4>
         {upcomingConcerts.length > 0 ? (
-          upcomingConcerts.map(concert => (
-            <p key={`${concert.city}/${concert.date}`}>
+          upcomingConcerts.map((concert, index) => (
+            <p key={`${concert.city}/${concert.date}/${index}`}>
               {concert.city} - {concert.date}
             </p>
           ))
@@ -127,7 +126,7 @@ const ArtistDetails = ({ artist }) => {
           <p>-</p>
         )}
       </ArtistData>
-      <SimilarArtists>similar artists</SimilarArtists>
+      <SimilarArtists artistId={artist.id}>similar artists</SimilarArtists>
     </ArtistDetailsWrapper>
   );
 };
