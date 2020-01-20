@@ -7,7 +7,6 @@ const ArtistThumbnailImage = styled.img`
   object-fit: contain;
   width: 3.75rem;
   height: 3.75rem;
-  background-color: #dcdcdc;
   border-radius: 0.3rem;
 `;
 
