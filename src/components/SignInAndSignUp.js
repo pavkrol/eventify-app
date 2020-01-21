@@ -17,6 +17,9 @@ const SignInAndSignUpWrapper = styled.div`
     right: 1.7rem;
     top: 2.2rem;
   }
+  @media (max-width: 40rem) {
+    width: 90vw;
+  }
 `;
 
 const SignInAndSignUp = ({ toggleAuthModal }) => (

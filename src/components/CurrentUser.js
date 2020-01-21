@@ -19,9 +19,13 @@ const CurrentUserWrapper = styled.section`
   grid-gap: 1rem;
   button {
     width: 11.25rem;
+    @media (max-width: 40rem) {
+      width: 100%;
+      grid-column: 1 / 3;
+    }
   }
   img {
-    width: 11.25rem;
+    width: 100%;
     height: auto;
     border-radius: 0.3125rem;
   }
@@ -34,6 +38,12 @@ const CurrentUserWrapper = styled.section`
     position: absolute;
     right: 1.7rem;
     top: 2.2rem;
+  }
+  @media (max-width: 40rem) {
+    grid-template-columns: 7rem 1fr;
+    grid-template-rows: 4rem auto 1fr;
+    height: auto;
+    width: 95vw;
   }
 `;
 

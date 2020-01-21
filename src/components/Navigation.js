@@ -17,6 +17,7 @@ const NavigationWrapper = styled.ul`
     right: 0;
     transition: transform 0.3s ease-in-out;
     background-color: #162233;
+    z-index: 5;
     transform: ${props =>
       props.isMenuOpen ? "translateX(0)" : "translateX(100%)"};
   }
@@ -57,14 +58,14 @@ const Navigation = ({
             isActive={item === activeScreen ? true : false}
             onClick={() => {
               changeScreen(item);
-              toggleMenu(!isMenuOpen);
+              toggleMenu(false);
             }}
           >
             {item}
           </NavItem>
         </li>
       ))}
-      <Profile toggleAuthModal={toggleAuthModal} />
+      <Profile toggleMenu={toggleMenu} toggleAuthModal={toggleAuthModal} />
     </NavigationWrapper>
   );
 };

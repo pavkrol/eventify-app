@@ -1,7 +1,7 @@
 export const getArtistImage = async artistName => {
   try {
     const imageResp = await fetch(
-      `https://api.deezer.com/search/artist?q=${artistName}`
+      `https://cors-anywhere.herokuapp.com/https://api.deezer.com/search/artist?q=${artistName}`
     );
     const imageData = await imageResp.json();
 

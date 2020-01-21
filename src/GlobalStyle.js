@@ -10,12 +10,12 @@ const GlobalStyle = createGlobalStyle`
   box-sizing: border-box;
   margin: 0;
 }
-html {
+html, body {
   color: #fff;
-}
-body {
   overflow-x: hidden;
+  position: relative;
 }
+
 textarea,
 input.text,
 input[type="text"],

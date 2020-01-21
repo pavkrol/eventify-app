@@ -15,6 +15,11 @@ const AuthenticationWrapper = styled.div`
   align-items: center;
   background-color: rgba(0, 0, 0, 0.7);
   color: #000;
+  overflow-y: scroll;
+  @media (max-width: 40rem) {
+    align-items: flex-start;
+    padding: 6.5rem 0 1.5rem 0;
+  }
 `;
 
 const Authentication = ({ loading, toggleAuthModal }) => {

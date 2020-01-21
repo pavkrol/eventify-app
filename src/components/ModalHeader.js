@@ -11,6 +11,9 @@ const ModalHeaderWrapper = styled.h2`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media (max-width: 40rem) {
+    font-size: 1.1rem;
+  }
 `;
 
 const ModalHeader = ({ children }) => {

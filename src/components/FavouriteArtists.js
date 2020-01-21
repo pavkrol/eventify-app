@@ -23,6 +23,9 @@ const FavouriteArtistsWrapper = styled.section`
     justify-content: center;
     align-items: center;
   }
+  @media (max-width: 43rem) {
+    padding: 2.5rem 2rem;
+  }
 `;
 
 const FavouriteArtists = () => {

@@ -27,6 +27,28 @@ const ArtistDetailsWrapper = styled.div`
     height: auto;
     border-radius: 0.375rem;
   }
+  @media (max-width: 82rem) {
+    grid-template-columns: 10rem 1fr 1fr;
+    grid-template-rows: 10rem auto;
+  }
+  @media (max-width: 53rem) {
+    grid-template-columns: 15rem 1fr;
+    grid-template-rows: 15rem auto auto;
+    button {
+      grid-column: 1 / 3;
+    }
+  }
+  @media (max-width: 32rem) {
+    grid-template-columns: 10rem 1fr;
+    grid-template-rows: 15rem auto auto;
+  }
+  @media (max-width: 28rem) {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, auto);
+    button {
+      grid-column: 1 / 2;
+    }
+  }
 `;
 
 const ArtistData = styled.div`
@@ -45,7 +67,7 @@ const ArtistData = styled.div`
     font-weight: 400;
     span {
       color: #a5abbd;
-      font-size: 1rem;
+
       font-weight: 300;
     }
   }
@@ -53,6 +75,25 @@ const ArtistData = styled.div`
     color: #a5abbd;
     font-size: 1rem;
     font-weight: 300;
+  }
+  @media (max-width: 82rem) {
+    h3 {
+      font-size: 1rem;
+    }
+    h4 {
+      font-size: 0.875rem;
+    }
+    p {
+      font-size: 0.875rem;
+    }
+  }
+  @media (max-width: 53rem) {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+  }
+  @media (max-width: 28rem) {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
   }
 `;
 

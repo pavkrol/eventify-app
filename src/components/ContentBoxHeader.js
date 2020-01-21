@@ -7,12 +7,14 @@ import HamburgerMenu from "./HamburgerMenu";
 
 const ContentBoxHeaderWrapper = styled.header`
   display: flex;
+  overflow-x: hidden;
   height: 5rem;
   padding: 0 5rem;
   align-items: center;
   justify-content: flex-end;
   background-color: #162233;
   border-radius: 0.625rem 0.625rem 0 0;
+  z-index: 10;
   h1 {
     margin-right: auto;
   }

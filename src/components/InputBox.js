@@ -22,6 +22,14 @@ const InputBoxWrapper = styled.div`
     padding-left: 1rem;
     height: 2rem;
   }
+  @media (max-width: 40rem) {
+    input {
+      flex-basis: 65%;
+    }
+    p {
+      font-size: 0.875rem;
+    }
+  }
 `;
 
 const InputBox = ({ children }) => {

@@ -16,11 +16,16 @@ const ProfileWrapper = styled.button`
   }
 `;
 
-const Profile = ({ toggleAuthModal }) => {
+const Profile = ({ toggleAuthModal, toggleMenu }) => {
   const user = useContext(UserContext);
 
   return (
-    <ProfileWrapper onClick={toggleAuthModal}>
+    <ProfileWrapper
+      onClick={() => {
+        toggleAuthModal();
+        toggleMenu();
+      }}
+    >
       {user ? "Profile" : "Sign In"}
     </ProfileWrapper>
   );

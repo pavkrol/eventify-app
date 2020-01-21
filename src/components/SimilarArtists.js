@@ -15,6 +15,26 @@ const SimilarArtistsWrapper = styled.div`
     font-weight: 400;
     font-size: 1.25rem;
   }
+  @media (max-width: 82rem) {
+    h3 {
+      font-size: 1rem;
+    }
+  }
+  @media (max-width: 53rem) {
+    grid-column: 1 / 3;
+    grid-row: 2 / 3;
+  }
+  @media (max-width: 28rem) {
+    grid-column: 1 / 2;
+    grid-row: 3 / 4;
+  }
+  @media (max-width: 22rem) {
+    grid-template-columns: 1fr;
+    grid-template-rows: 2rem repeat(4, 1fr);
+    h3 {
+      grid-column: 1 / 2;
+    }
+  }
 `;
 
 const SingleArtist = styled.div`
@@ -27,6 +47,15 @@ const SingleArtist = styled.div`
   }
   p {
     margin-left: 1rem;
+  }
+  @media (max-width: 82rem) {
+    img {
+      width: 3rem;
+      height: 3rem;
+    }
+    p {
+      font-size: 0.875rem;
+    }
   }
 `;
 

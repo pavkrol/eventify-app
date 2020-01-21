@@ -18,6 +18,7 @@ const BurgerWrapper = styled.button`
     outline: none;
   }
   div {
+    z-index: 10;
     width: 2rem;
     height: 0.25rem;
     background: #e2f1ff;
