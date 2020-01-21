@@ -10,9 +10,16 @@ Use the package manager npm to install the Eventify app.
 npm install
 ```
 
+To run application locally:
+
+```bash
+npm run live
+```
+
 ## Live version
 
-The live version of the game will be available soon.
+The live version of current state of application is available at https://serene-beaver-32af35.netlify.com
+The project is still under development.
 
 ## Built With
 
@@ -20,6 +27,8 @@ The live version of the game will be available soon.
 - Styled Components
 - Reach Router
 - Webpack
+- Firebase
+- GSAP
 
 ## Contributing
 
