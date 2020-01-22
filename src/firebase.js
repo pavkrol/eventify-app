@@ -83,13 +83,26 @@ export const getFavouriteArtists = async uid => {
   }
 };
 
+export const getEventsCalendar = async uid => {
+  if (!uid) return null;
+  try {
+    const userDocument = await firestore
+      .collection("users")
+      .doc(uid)
+      .get();
+    return userDocument.data(concerts);
+  } catch (error) {
+    console.error("Error fetching user", error.message);
+  }
+};
+
 export const addFavourites = async (uid, artistId, artistName) => {
   if (!uid) return;
 
   const data = await getUserDocument(uid);
   const userDatabaseRef = firestore.doc(`users/${uid}`);
   let currentArtists = data.favouriteArtists;
-  if (currentArtists.length) {
+  if (currentArtists && currentArtists.length) {
     if (currentArtists.find(artist => artist.id === artistId)) {
       currentArtists = currentArtists.filter(artist => artist.id !== artistId);
     } else {
@@ -110,6 +123,53 @@ export const addFavourites = async (uid, artistId, artistName) => {
     } catch (error) {
       console.error("Error updating user", error);
     }
+  }
+};
+
+export const addEventToCalendar = async (uid, event) => {
+  if (!uid) return;
+
+  const data = await getUserDocument(uid);
+  const userDatabaseRef = firestore.doc(`users/${uid}`);
+
+  let currentEvents = data.concerts;
+
+  if (currentEvents && currentEvents.length) {
+    if (!currentEvents.find(item => item.id === event.id)) {
+      currentEvents = [{ ...event }, ...currentEvents];
+    }
+    try {
+      await userDatabaseRef.update({
+        concerts: currentEvents
+      });
+    } catch (error) {
+      console.error("Error updating user", error);
+    }
+  } else {
+    try {
+      await userDatabaseRef.update({
+        concerts: [{ ...event }]
+      });
+    } catch (error) {
+      console.error("Error updating user", error);
+    }
+  }
+};
+
+export const removeEventFromCalendar = async (uid, eventId) => {
+  if (!uid) return;
+
+  const data = await getUserDocument(uid);
+  const userDatabaseRef = firestore.doc(`users/${uid}`);
+
+  let currentConcerts = data.concerts;
+  currentConcerts = currentConcerts.filter(concert => concert.id !== eventId);
+  try {
+    await userDatabaseRef.update({
+      concerts: currentConcerts
+    });
+  } catch (error) {
+    console.error("Error updating user", error);
   }
 };
 

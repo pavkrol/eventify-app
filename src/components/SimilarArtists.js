@@ -25,8 +25,8 @@ const SimilarArtistsWrapper = styled.div`
     grid-row: 2 / 3;
   }
   @media (max-width: 28rem) {
-    grid-column: 1 / 2;
-    grid-row: 3 / 4;
+    grid-column: 1 / 3;
+    grid-row: 2 / 3;
   }
   @media (max-width: 22rem) {
     grid-template-columns: 1fr;

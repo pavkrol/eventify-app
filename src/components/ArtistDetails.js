@@ -43,10 +43,10 @@ const ArtistDetailsWrapper = styled.div`
     grid-template-rows: 15rem auto auto;
   }
   @media (max-width: 28rem) {
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(4, auto);
-    button {
-      grid-column: 1 / 2;
+    grid-template-columns: 1fr 4rem;
+    grid-template-rows: repeat(3, auto);
+    img {
+      grid-column: 2 / 3;
     }
   }
 `;
@@ -93,7 +93,6 @@ const ArtistData = styled.div`
   }
   @media (max-width: 28rem) {
     grid-column: 1 / 2;
-    grid-row: 2 / 3;
   }
 `;
 

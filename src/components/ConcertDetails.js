@@ -1,66 +1,31 @@
-import React, { useState, useContext, useEffect } from "react";
-import { UserContext } from "../providers/UserProvider";
-import Alert from "./Alert";
+import React, { useContext, useState, useEffect } from "react";
 import styled from "styled-components";
+import { UserContext } from "../providers/UserProvider";
+import { getArtistImage } from "../utilities";
+import { removeEventFromCalendar } from "../firebase";
+import ResultsDataBox from "./ResultsDataBox";
 import ArtistThumbnail from "./ArtistThumbnail";
 import Heart from "./Heart";
-import ResultsDataBox from "./ResultsDataBox";
-import EmptyButton from "./EmptyButton";
-import { getArtistImage } from "../utilities";
-import { addEventToCalendar } from "../firebase";
+import Loader from "./Loader";
+import BasicButton from "./BasicButton";
+import defaultImage from "../img/default.jpg";
 
-const SingleResult = ({ data }) => {
-  const [alert, setAlert] = useState(false);
-  const [imageSrc, setImageSrc] = useState(null);
-  const user = useContext(UserContext);
-  const toggleAlert = () => {
-    setAlert(!alert);
-  };
-
-  const handleAddToCalendar = () => {
-    user ? addEventToCalendar(user.uid, data) : toggleAlert();
-  };
-
-  useEffect(() => {
-    const fetchImageSource = async () => {
-      const image = await getArtistImage(data.artist);
-      setImageSrc(image);
-    };
-    fetchImageSource();
-  }, []);
-
-  return (
-    <SingleResultWrapper>
-      {alert && (
-        <Alert action={toggleAlert}>
-          You need to be logged in to add artist to favourites
-        </Alert>
-      )}
-      <ArtistThumbnail source={imageSrc} />
-      <Heart artistId={data.artistId} artistName={data.artist} />
-      <ResultsDataBox data={[data.artist, data.name]} />
-      <ResultsDataBox data={[data.city, data.venue]} />
-      <ResultsDataBox data={[data.date]} />
-      <EmptyButton height="2.5" color="#E2F1FF" action={handleAddToCalendar}>
-        Add to calendar
-      </EmptyButton>
-      <TicketsLink href={data.uri}>Buy ticket</TicketsLink>
-    </SingleResultWrapper>
-  );
-};
-
-export default SingleResult;
-
-const SingleResultWrapper = styled.div`
-  width: 100%;
+const ConcertDetailsWrapper = styled.div`
+  margin: 1rem 0;
+  padding-bottom: 1rem;
   display: grid;
-  justify-content: space-between;
   align-items: center;
   grid-template-columns: 3.75rem 5rem 1fr 1fr 9rem 9rem 9rem;
+  grid-template-rows: 3.75rem;
   grid-column-gap: 1rem;
   padding-bottom: 1.5rem;
   margin-top: 1.5rem;
   border-bottom: 0.5px solid #a5abbd50;
+  font-family: "Work Sans", sans-serif;
+  color: #e2f1ff;
+  :last-child {
+    border-bottom: none;
+  }
   :last-child {
     border-bottom: none;
   }
@@ -187,3 +152,42 @@ const TicketsLink = styled.a`
     background-color: #0093ff80;
   }
 `;
+
+const ConcertDetails = ({ event }) => {
+  const [isLoading, setLoading] = useState(true);
+  const user = useContext(UserContext);
+  const [artistImage, setArtistImage] = useState("");
+
+  useEffect(() => {
+    const getArtistData = async () => {
+      const image = await getArtistImage(event.artist);
+      setArtistImage(image);
+      setLoading(false);
+    };
+    getArtistData();
+  }, []);
+
+  return (
+    <ConcertDetailsWrapper>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <ArtistThumbnail source={artistImage || defaultImage} />
+      )}
+      <Heart artistId={event.artistId} artistName={event.artist} />
+      <ResultsDataBox data={[event.artist, event.name]} />
+      <ResultsDataBox data={[event.city, event.venue]} />
+      <ResultsDataBox data={[event.date]} />
+      <BasicButton
+        height="2.4"
+        color="#D10D0D"
+        action={() => removeEventFromCalendar(user.uid, event.id)}
+      >
+        Remove
+      </BasicButton>
+      <TicketsLink href={event.uri}>Buy ticket</TicketsLink>
+    </ConcertDetailsWrapper>
+  );
+};
+
+export default ConcertDetails;

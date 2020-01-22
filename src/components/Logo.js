@@ -2,9 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const LogoWrapper = styled.h1`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: block;
   width: 12rem;
   position: relative;
   font-family: "Rubik", sans-serif;
@@ -14,6 +12,7 @@ const LogoWrapper = styled.h1`
   letter-spacing: 0.1em;
   padding-left: 1em;
   height: 2.5em;
+  line-height: 5rem;
   background: linear-gradient(
     180deg,
     #e2f1ff 0%,
@@ -27,6 +26,7 @@ const LogoWrapper = styled.h1`
     position: absolute;
     width: 0.625em;
     height: 1.25em;
+    top: 25%;
     left: 0;
     background: linear-gradient(
       180deg,
@@ -37,7 +37,7 @@ const LogoWrapper = styled.h1`
   }
   @media (max-width: 25rem) {
     font-size: 1.5rem;
-    justify-content: flex-start;
+    line-height: 3.75rem;
   }
 `;
 

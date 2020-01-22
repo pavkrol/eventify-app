@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Loader from "./Loader";
+import ConcertsCalendar from "./ConcertsCalendar";
 import FavouriteArtists from "./FavouriteArtists";
 import SearchEvents from "./SearchEvents";
 
@@ -14,7 +14,7 @@ const ContentBoxBody = ({ activeScreen }) => {
       case "my artists":
         return <FavouriteArtists />;
       case "my concerts":
-        return <Loader />;
+        return <ConcertsCalendar />;
     }
   };
 

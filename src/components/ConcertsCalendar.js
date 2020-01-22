@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from "react";
 import { UserContext } from "../providers/UserProvider";
-import ArtistDetails from "./ArtistDetails";
+import ConcertDetails from "./ConcertDetails";
 import styled from "styled-components";
 
-const FavouriteArtistsWrapper = styled.section`
+const ConcertsCalendarWrapper = styled.section`
   font-family: "Work Sans", sans-serif;
   padding: 2.5rem 4.7rem;
   h2 {
@@ -29,7 +29,7 @@ const FavouriteArtistsWrapper = styled.section`
   }
 `;
 
-const FavouriteArtists = () => {
+const ConcertsCalendar = () => {
   const user = useContext(UserContext);
 
   useEffect(() => {
@@ -37,21 +37,23 @@ const FavouriteArtists = () => {
   });
 
   return (
-    <FavouriteArtistsWrapper>
-      <h2>Favourite Artists</h2>
+    <ConcertsCalendarWrapper>
+      <h2>Events calendar</h2>
       {!user ? (
         <h3 className="info">
           You need to sign in to display favourite artists.
         </h3>
-      ) : !user.favouriteArtists.length ? (
-        <h3 className="info">You don't have any favourite artists yet.</h3>
+      ) : !user.concerts.length || !user.concerts ? (
+        <h3 className="info">
+          You don't have any concerts in your calendar yet.
+        </h3>
       ) : (
-        user.favouriteArtists.map(artist => (
-          <ArtistDetails key={artist.id} artist={artist} />
+        user.concerts.map(event => (
+          <ConcertDetails key={event.id} event={event} />
         ))
       )}
-    </FavouriteArtistsWrapper>
+    </ConcertsCalendarWrapper>
   );
 };
 
-export default FavouriteArtists;
+export default ConcertsCalendar;
