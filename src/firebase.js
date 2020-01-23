@@ -33,12 +33,16 @@ export const createUserProfileDocument = async (user, additionalData) => {
     const { displayName, email, photoURL } = user;
     const date = new Date();
     const createdAt = date.getFullYear();
+    const favouriteArtists = [];
+    const concerts = [];
     try {
       await userDatabaseRef.set({
         displayName,
         email,
         photoURL,
         createdAt,
+        favouriteArtists,
+        concerts,
         ...additionalData
       });
     } catch (error) {

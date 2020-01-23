@@ -32,10 +32,6 @@ const ConcertsCalendarWrapper = styled.section`
 const ConcertsCalendar = () => {
   const user = useContext(UserContext);
 
-  useEffect(() => {
-    console.log("User", user);
-  });
-
   return (
     <ConcertsCalendarWrapper>
       <h2>Events calendar</h2>
@@ -43,7 +39,7 @@ const ConcertsCalendar = () => {
         <h3 className="info">
           You need to sign in to display favourite artists.
         </h3>
-      ) : !user.concerts.length || !user.concerts ? (
+      ) : !user.concerts.length ? (
         <h3 className="info">
           You don't have any concerts in your calendar yet.
         </h3>

@@ -32,9 +32,6 @@ const Heart = ({ artistId, artistName }) => {
   };
 
   const handleAddToFavourites = (uid, artistId, artistName) => {
-    console.log(
-      "Uid: " + uid + ", Artist: " + artistId + ", ArtistName: " + artistName
-    );
     toggleHeart(!isFull);
     addFavourites(uid, artistId, artistName);
   };

@@ -32,10 +32,6 @@ const FavouriteArtistsWrapper = styled.section`
 const FavouriteArtists = () => {
   const user = useContext(UserContext);
 
-  useEffect(() => {
-    console.log("User", user);
-  });
-
   return (
     <FavouriteArtistsWrapper>
       <h2>Favourite Artists</h2>
