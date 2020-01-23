@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import ChooseQuery from "./ChooseQuery";
 
@@ -51,6 +51,11 @@ const PopupWrapper = styled.div`
 `;
 
 const Popup = ({ data, confirmChoice }) => {
+  useEffect(() => {
+    document.body.style.overflowY = "hidden";
+    return () => (document.body.style.overflowY = "unset");
+  }, []);
+
   return (
     <PopupWrapper>
       <div className="box">

@@ -12,6 +12,7 @@ const SignInAndSignUpWrapper = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
+  z-index: 20;
   > button {
     position: absolute;
     right: 1.7rem;
@@ -22,12 +23,14 @@ const SignInAndSignUpWrapper = styled.div`
   }
 `;
 
-const SignInAndSignUp = ({ toggleAuthModal }) => (
-  <SignInAndSignUpWrapper>
-    <CloseButton action={toggleAuthModal} />
-    <SignIn />
-    <SignUp />
-  </SignInAndSignUpWrapper>
-);
+const SignInAndSignUp = ({ toggleAuthModal }) => {
+  return (
+    <SignInAndSignUpWrapper>
+      <CloseButton action={toggleAuthModal} />
+      <SignIn />
+      <SignUp />
+    </SignInAndSignUpWrapper>
+  );
+};
 
 export default SignInAndSignUp;

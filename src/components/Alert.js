@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import CloseButton from "./CloseButton";
 
@@ -37,6 +37,11 @@ const AlertWrapper = styled.div`
 `;
 
 const Alert = ({ children, action }) => {
+  useEffect(() => {
+    document.body.style.overflowY = "hidden";
+    return () => (document.body.style.overflowY = "unset");
+  }, []);
+
   return (
     <AlertWrapper>
       <div>

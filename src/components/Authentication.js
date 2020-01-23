@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import CurrentUser from "./CurrentUser";
 import SignInAndSignUp from "./SignInAndSignUp";
 import { UserContext } from "../providers/UserProvider";
@@ -15,6 +15,7 @@ const AuthenticationWrapper = styled.div`
   align-items: center;
   background-color: rgba(0, 0, 0, 0.7);
   color: #000;
+  z-index: 20;
   overflow-y: scroll;
   @media (max-width: 40rem) {
     align-items: flex-start;
@@ -25,6 +26,12 @@ const AuthenticationWrapper = styled.div`
 const Authentication = ({ loading, toggleAuthModal }) => {
   const user = useContext(UserContext);
   if (loading) return null;
+
+  useEffect(() => {
+    document.body.style.overflowY = "hidden";
+    return () => (document.body.style.overflowY = "unset");
+  }, []);
+
   return (
     <AuthenticationWrapper>
       {user ? (
