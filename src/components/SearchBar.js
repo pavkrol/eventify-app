@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import BasicButton from "./BasicButton";
+import Alert from "./Alert";
 
 const SearchBarWrapper = styled.div`
   background-color: #1a2433;
@@ -65,9 +66,20 @@ const SearchBarWrapper = styled.div`
 const SearchBar = ({ search }) => {
   const [searchBy, setSearchBy] = useState("artist");
   const [inputValue, setInputValue] = useState("");
+  const [alert, setAlert] = useState(false);
+
+  const toggleAlert = () => {
+    setAlert(!alert);
+  };
 
   return (
     <SearchBarWrapper>
+      {alert && (
+        <Alert action={toggleAlert}>
+          Artist/City field cannot be empty. Please, fill this field and try
+          again.
+        </Alert>
+      )}
       <p>Search by:</p>
       <select onChange={e => setSearchBy(e.target.value)}>
         <option value="artist">Artist</option>
@@ -78,7 +90,13 @@ const SearchBar = ({ search }) => {
       <BasicButton
         height="2.5"
         color="#2BCA91"
-        action={() => search(searchBy, inputValue)}
+        action={() =>
+          inputValue === "" ||
+          inputValue === null ||
+          !inputValue.replace(/\s/g, "").length
+            ? toggleAlert()
+            : search(searchBy, inputValue)
+        }
       >
         Search
       </BasicButton>
