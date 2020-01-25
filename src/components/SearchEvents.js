@@ -37,7 +37,10 @@ const SearchEvents = () => {
     setFetchingData(true);
     if (type === "artist") {
       const artists_list = await searchArtist(value);
-      if (artists_list.resultsPage.results.artist.length === 1) {
+      if (!artists_list.length) {
+        setFetchingData(false);
+        setNoResults(true);
+      } else if (artists_list.resultsPage.results.artist.length === 1) {
         searchEvents(
           artists_list.resultsPage.results.artist[0].id,
           artists_list.resultsPage.results.artist[0].displayName
@@ -49,6 +52,9 @@ const SearchEvents = () => {
       const cities_list = await searchCity(value);
       if (cities_list.length === 1) {
         searchEventsByCity(cities_list[0].id);
+      } else if (cities_list.length === 0) {
+        setFetchingData(false);
+        setNoResults(true);
       } else {
         chooseQuery(cities_list);
       }
@@ -60,7 +66,7 @@ const SearchEvents = () => {
       `https://api.songkick.com/api/3.0/search/artists.json?apikey=${key}&query=${artistName}`
     );
     const data = await resp.json();
-    return data;
+    return data.resultsPage.totalEntries ? data : [];
   };
 
   const searchCity = async city => {
@@ -68,17 +74,20 @@ const SearchEvents = () => {
       `https://api.songkick.com/api/3.0/search/locations.json?query=${city}&apikey=${key}`
     );
     const data = await resp.json();
-    const cities_list = data.resultsPage.results.location.map(location => ({
-      id: location.metroArea.id,
-      name: location.city.displayName,
-      country: location.metroArea.country.displayName,
-      area: location.metroArea.displayName,
-      state:
-        location.metroArea.country.displayName === "US" ||
-        location.metroArea.country.displayName === "Canada"
-          ? location.metroArea.state.displayName
-          : ""
-    }));
+    console.log(data);
+    const cities_list = data.resultsPage.totalEntries
+      ? data.resultsPage.results.location.map(location => ({
+          id: location.metroArea.id,
+          name: location.city.displayName,
+          country: location.metroArea.country.displayName,
+          area: location.metroArea.displayName,
+          state:
+            location.metroArea.country.displayName === "US" ||
+            location.metroArea.country.displayName === "Canada"
+              ? location.metroArea.state.displayName
+              : ""
+        }))
+      : [];
     return cities_list;
   };
 
