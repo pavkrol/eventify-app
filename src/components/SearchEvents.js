@@ -37,7 +37,7 @@ const SearchEvents = () => {
     setFetchingData(true);
     if (type === "artist") {
       const artists_list = await searchArtist(value);
-      if (!artists_list.length) {
+      if (artists_list.resultsPage.totalEntries === 0) {
         setFetchingData(false);
         setNoResults(true);
       } else if (artists_list.resultsPage.results.artist.length === 1) {
@@ -66,7 +66,7 @@ const SearchEvents = () => {
       `https://api.songkick.com/api/3.0/search/artists.json?apikey=${key}&query=${artistName}`
     );
     const data = await resp.json();
-    return data.resultsPage.totalEntries ? data : [];
+    return data;
   };
 
   const searchCity = async city => {
@@ -74,7 +74,6 @@ const SearchEvents = () => {
       `https://api.songkick.com/api/3.0/search/locations.json?query=${city}&apikey=${key}`
     );
     const data = await resp.json();
-    console.log(data);
     const cities_list = data.resultsPage.totalEntries
       ? data.resultsPage.results.location.map(location => ({
           id: location.metroArea.id,
