@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
+import gsap from "gsap";
 import styled from "styled-components";
 import CloseButton from "./CloseButton";
 
@@ -13,6 +14,7 @@ const AlertWrapper = styled.div`
   align-items: center;
   background-color: rgba(0, 0, 0, 0.7);
   div {
+    visibility: hidden;
     position: relative;
     display: flex;
     justify-content: center;
@@ -37,14 +39,25 @@ const AlertWrapper = styled.div`
 `;
 
 const Alert = ({ children, action }) => {
+  const modalRef = useRef(null);
+
   useEffect(() => {
     document.body.style.overflowY = "hidden";
     return () => (document.body.style.overflowY = "unset");
   }, []);
 
+  useEffect(() => {
+    gsap.set(modalRef.current, {
+      opacity: 0,
+      y: -20,
+      visibility: "visible"
+    });
+    gsap.to(modalRef.current, { duration: 0.5, opacity: 1, y: 0 });
+  }, []);
+
   return (
     <AlertWrapper>
-      <div>
+      <div ref={modalRef}>
         {children}
         <CloseButton action={action} />
       </div>

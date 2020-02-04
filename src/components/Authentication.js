@@ -23,9 +23,8 @@ const AuthenticationWrapper = styled.div`
   }
 `;
 
-const Authentication = ({ loading, toggleAuthModal }) => {
+const Authentication = ({ toggleAuthModal, openAuthModal }) => {
   const user = useContext(UserContext);
-  if (loading) return null;
 
   useEffect(() => {
     document.body.style.overflowY = "hidden";
@@ -37,7 +36,10 @@ const Authentication = ({ loading, toggleAuthModal }) => {
       {user ? (
         <CurrentUser {...user} toggleAuthModal={toggleAuthModal} />
       ) : (
-        <SignInAndSignUp toggleAuthModal={toggleAuthModal} />
+        <SignInAndSignUp
+          openAuthModal={openAuthModal}
+          toggleAuthModal={toggleAuthModal}
+        />
       )}
     </AuthenticationWrapper>
   );
