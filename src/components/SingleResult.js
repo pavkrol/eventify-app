@@ -1,5 +1,4 @@
-import React, { useState, useContext, useEffect, useRef } from "react";
-import gsap from "gsap";
+import React, { useState, useContext, useEffect } from "react";
 import { UserContext } from "../providers/UserProvider";
 import Alert from "./Alert";
 import styled from "styled-components";
@@ -11,7 +10,6 @@ import { getArtistImage } from "../utilities";
 import { addEventToCalendar } from "../firebase";
 
 const SingleResult = ({ data }) => {
-  const resultRef = useRef(null);
   const [alert, setAlert] = useState(false);
   const [imageSrc, setImageSrc] = useState(null);
   const user = useContext(UserContext);
@@ -31,17 +29,8 @@ const SingleResult = ({ data }) => {
     fetchImageSource();
   }, []);
 
-  useEffect(() => {
-    gsap.set(resultRef.current, {
-      opacity: 0,
-      y: -20,
-      visibility: "visible"
-    });
-    gsap.to(resultRef.current, { duration: 0.5, opacity: 1, y: 0 });
-  }, []);
-
   return (
-    <SingleResultWrapper ref={resultRef}>
+    <SingleResultWrapper>
       {alert && (
         <Alert action={toggleAlert}>
           You need to be logged in to add artist to favourites
@@ -72,7 +61,6 @@ const SingleResultWrapper = styled.div`
   padding-bottom: 1.5rem;
   margin-top: 1.5rem;
   border-bottom: 0.5px solid #a5abbd50;
-  visibility: hidden;
   :last-child {
     border-bottom: none;
   }

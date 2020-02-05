@@ -13,6 +13,7 @@ const AlertWrapper = styled.div`
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.7);
+  z-index: 20;
   div {
     visibility: hidden;
     position: relative;
