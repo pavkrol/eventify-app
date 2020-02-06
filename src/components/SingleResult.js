@@ -8,6 +8,8 @@ import ResultsDataBox from "./ResultsDataBox";
 import EmptyButton from "./EmptyButton";
 import { getArtistImage } from "../utilities";
 import { addEventToCalendar } from "../firebase";
+import { Transition } from "react-transition-group";
+import gsap from "gsap";
 
 const SingleResult = ({ data }) => {
   const [alert, setAlert] = useState(false);
@@ -31,11 +33,24 @@ const SingleResult = ({ data }) => {
 
   return (
     <SingleResultWrapper>
-      {alert && (
+      <Transition
+        timeout={400}
+        mountOnEnter
+        unmountOnExit
+        in={alert}
+        addEndListener={(node, done) => {
+          gsap.to(node, {
+            duration: 0.4,
+            y: alert ? 0 : -20,
+            autoAlpha: alert ? 1 : 0,
+            onComplete: done
+          });
+        }}
+      >
         <Alert action={toggleAlert}>
-          You need to be logged in to add artist to favourites
+          You need to be logged in to add concert to your calendar
         </Alert>
-      )}
+      </Transition>
       <ArtistThumbnail source={imageSrc} />
       <Heart artistId={data.artistId} artistName={data.artist} />
       <ResultsDataBox data={[data.artist, data.name]} />

@@ -5,6 +5,8 @@ import SearchResults from "./SearchResults";
 import { firestore } from "../firebase";
 import Popup from "./Popup";
 import { getArtistImage } from "../utilities";
+import { Transition } from "react-transition-group";
+import gsap from "gsap";
 
 const SearchEventsWrapper = styled.div`
   display: flex;
@@ -164,9 +166,22 @@ const SearchEvents = () => {
         fetchingData={fetchingData}
         noResults={noResults}
       />
-      {popupOpen && (
+      <Transition
+        timeout={1000}
+        mountOnEnter
+        unmountOnExit
+        in={popupOpen}
+        addEndListener={(node, done) => {
+          gsap.to(node, {
+            duration: 0.4,
+            y: popupOpen ? 0 : -20,
+            autoAlpha: popupOpen ? 1 : 0,
+            onComplete: done
+          });
+        }}
+      >
         <Popup data={temporaryData} confirmChoice={confirmChoice} />
-      )}
+      </Transition>
     </SearchEventsWrapper>
   );
 };

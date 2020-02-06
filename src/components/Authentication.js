@@ -17,6 +17,8 @@ const AuthenticationWrapper = styled.div`
   color: #000;
   z-index: 20;
   overflow-y: scroll;
+  opacity: 0;
+  transform: translateY(-20px);
   @media (max-width: 40rem) {
     align-items: flex-start;
     padding: 6.5rem 0 1.5rem 0;

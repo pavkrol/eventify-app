@@ -14,7 +14,6 @@ const SignInAndSignUpWrapper = styled.div`
   flex-direction: column;
   position: relative;
   z-index: 20;
-  visibility: hidden;
   > button {
     position: absolute;
     right: 1.7rem;
@@ -25,17 +24,8 @@ const SignInAndSignUpWrapper = styled.div`
   }
 `;
 
-const SignInAndSignUp = ({ toggleAuthModal, openAuthModal }) => {
+const SignInAndSignUp = ({ toggleAuthModal }) => {
   const modalRef = useRef(null);
-
-  useEffect(() => {
-    gsap.set(modalRef.current, {
-      opacity: 0,
-      y: -20,
-      visibility: "visible"
-    });
-    gsap.to(modalRef.current, { duration: 0.5, opacity: 1, y: 0 });
-  }, []);
 
   return (
     <SignInAndSignUpWrapper ref={modalRef}>

@@ -5,6 +5,8 @@ import { addFavourites } from "../firebase";
 import Alert from "./Alert";
 import full_heart from "../img/heart.png";
 import empty_heart from "../img/empty_heart.png";
+import { Transition } from "react-transition-group";
+import gsap from "gsap";
 
 const HeartWrapper = styled.div`
   display: flex;
@@ -46,11 +48,24 @@ const Heart = ({ artistId, artistName }) => {
 
   return (
     <HeartWrapper isFull={isFull}>
-      {alert && (
+      <Transition
+        timeout={400}
+        mountOnEnter
+        unmountOnExit
+        in={alert}
+        addEndListener={(node, done) => {
+          gsap.to(node, {
+            duration: 0.4,
+            y: alert ? 0 : -20,
+            autoAlpha: alert ? 1 : 0,
+            onComplete: done
+          });
+        }}
+      >
         <Alert action={toggleAlert}>
           You need to be logged in to add artist to favourites
         </Alert>
-      )}
+      </Transition>
       <button
         onClick={() => {
           user

@@ -7,11 +7,13 @@ const PopupWrapper = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: calc(100vh + 20px);
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.7);
+  transform: translate3d(0, -20px, 0);
+  opacity: 0;
   .box {
     width: 60vw;
     height: 60vh;
